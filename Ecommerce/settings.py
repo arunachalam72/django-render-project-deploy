@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 import os
 from datetime import timedelta
 import dj_database_url
+import cloudinary
 
 load_dotenv()
 
@@ -29,7 +30,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'django-insecure-@w(()9v=1_u@pmcp%97+mxz21=ostg7psz3sdjcnhd-4xmona^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG') == True
+# DEBUG = os.getenv('DEBUG') == True
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -189,11 +191,17 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-CLOUDINARY_STORAGE={
-    'CLOUD_NAME':os.getenv('CLOUD_NAME'),
-    'API_KEY':os.getenv('API_KEY'),
-    'API_SECRET':os.getenv('API_SECRET')
-    }
+# CLOUDINARY_STORAGE={
+#     'CLOUD_NAME':os.getenv('CLOUD_NAME'),
+#     'API_KEY':os.getenv('API_KEY'),
+#     'API_SECRET':os.getenv('API_SECRET')
+#     }
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUD_NAME"),
+    api_key=os.getenv("API_KEY"),
+    api_secret=os.getenv("API_SECRET"),
+)
 
 #DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
 
