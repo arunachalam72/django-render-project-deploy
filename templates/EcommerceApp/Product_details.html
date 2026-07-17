@@ -21,7 +21,11 @@
     <!-- Left: Images -->
     <div class="col-lg-6 col-md-12 mb-4 text-center">
       <div class="main-product-img">
-        <img id="mainImage" src="{{ product.product_image.url }}" alt="{{ product.name }}" class="img-fluid img-animate">
+        {% if product.product_image %}
+        <img id="mainImage" src="{{ product.product_image.url }}" alt="{{ product.name }}">
+        {% else %}
+        <img id="mainImage" src="/static/images/default.jpg" alt="{{ product.name }}">
+        {% endif %}
       </div>
 
       <div class="d-flex justify-content-center gap-2 flex-wrap small-imgs mt-3">
