@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'EcommerceApp',
     'django_extensions',
-    'rest_framework'
+    'rest_framework',
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
@@ -172,6 +174,23 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 #for https production
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+
+CLOUDINARY_STORAGE={
+    'CLOUD_NAME':os.getenv('CLOUD_NAME'),
+    'API_KEY':os.getenv('API_KEY'),
+    'API_SECRET':os.getenv('API_SECRET')
+    }
+
+#DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
+
+STORAGES = {
+    "default":{
+        "BACKEND":"cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles":{
+        "BACKEND":"whitenoise.storage.CompressedManifestStaticFilesStorage"
+    }
+}
 
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
