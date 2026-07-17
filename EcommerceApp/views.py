@@ -269,7 +269,7 @@ def product_detail(request, id):
 def cart_view(request):
     cart_items = CartItem.objects.filter(user=request.user)
     total = sum(item.quantity * item.product.selling_price for item in cart_items)
-    return render(request, 'EcommerceApp/cart.html', {'cart_items': cart_items, 'total': total})
+    return render(request, 'EcommerceApp/Cart.html', {'cart_items': cart_items, 'total': total})
 
 
 def update_cart_quantity(request, item_id):
@@ -407,7 +407,7 @@ def product_list(request):
     if request.user.is_authenticated:
         favorite_ids = list(Favorite.objects.filter(user=request.user).values_list('product_id', flat=True))
 
-    return render(request, 'EcommerceApp/products.html', {
+    return render(request, 'EcommerceApp/Product.html', {
         'products': products,
         'selected_price': selected_price,
         'favorite_ids': favorite_ids,
