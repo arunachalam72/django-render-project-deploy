@@ -259,7 +259,7 @@ def product_detail(request, id):
         # Fetch related products from the same category (excluding the current product)
         related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:4]
 
-        return render(request, 'EcommerceApp/product_details.html', {
+        return render(request, 'EcommerceApp/Product_details.html', {
             'product': product,
             'related_products': related_products
         })
