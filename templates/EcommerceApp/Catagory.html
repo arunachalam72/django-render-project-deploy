@@ -173,7 +173,11 @@
       {% for prod in products %}
       <div class="col-md-4 col-sm-6 col-6" data-aos="flip-left" data-aos-delay="{{ forloop.counter0|add:100 }}">
         <div class="category-card floating">
-          <img src="{{ prod.image.url }}" alt="{{ prod.name }}">
+          {% if prod.image %}
+              <img src="{{ prod.image.url }}" alt="{{ prod.name }}">
+          {% else %}
+              <img src="/static/images/default-category.jpg" alt="{{ prod.name }}">
+          {% endif %}
           <div class="category-overlay">
             <h5>{{ prod.name }}</h5>
             <a href="{% url 'product' prod.name %}">Shop Now</a>

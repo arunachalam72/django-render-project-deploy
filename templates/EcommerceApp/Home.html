@@ -208,7 +208,11 @@
         <div class="swiper-slide">
           <a href="{% url 'product' cat.name %}">
             <div class="category-card position-relative" data-aos="zoom-in">
-              <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+              {% if cat.image %}
+                  <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+              {% else %}
+                  <img src="/static/images/default-category.jpg" alt="{{ cat.name }}">
+              {% endif %}
               <div class="category-name position-absolute bottom-0 start-0 text-white fw-bold ps-3 pb-2 fs-5">
                 {{ cat.name }}
               </div>
@@ -227,7 +231,11 @@
       <div class="col-lg-3 col-md-4 col-sm-6 col-6" data-aos="zoom-in-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
         <div class="product-card bg-white rounded-4 shadow-sm position-relative overflow-hidden">
           <a href="{% url 'product_detail' prod.id %}">
-            <img src="{{ prod.product_image.url }}" alt="{{ prod.name }}">
+            {% if prod.product_image %}
+                <img src="{{ prod.product_image.url }}" alt="{{ prod.name }}">
+            {% else %}
+                <img src="/static/images/default-product.jpg" alt="{{ prod.name }}">
+            {% endif %}
           </a>
           <i class="fa-solid fa-heart favorite-icon {% if prod.id in favorite_ids %}active{% endif %}"
              data-product-id="{{ prod.id }}"
