@@ -1,0 +1,8 @@
+{% extends 'EcommerceApp/Base.html' %}
+{% block content %}
+<div class="container mt-5 pt-4 text-center">
+    <h2 class="text-success">Payment Successful 🎉</h2>
+    <p>Your Order ID: {{ order.order_id }}</p>
+    <a href="{% url 'home' %}" class="btn btn-primary">Continue Shopping</a>
+</div>
+{% endblock %}

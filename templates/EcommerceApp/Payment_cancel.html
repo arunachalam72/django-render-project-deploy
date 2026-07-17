@@ -1,0 +1,7 @@
+{% extends 'EcommerceApp/Base.html' %}
+{% block content %}
+<div class="container mt-5 pt-4 text-center">
+    <h2 class="text-danger">Payment Cancelled ❌</h2>
+    <a href="{% url 'checkout' %}" class="btn btn-warning">Try Again</a>
+</div>
+{% endblock %}

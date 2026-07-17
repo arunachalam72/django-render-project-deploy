@@ -1,0 +1,148 @@
+{% extends 'EcommerceApp/Base.html' %}
+{% block content %}
+
+<div class="container py-5" style="margin-top:80px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+
+            <!-- Checkout Card -->
+            <div class="card border-0 shadow-lg rounded-4 p-4 animate__animated animate__fadeIn">
+
+                <h2 class="text-center fw-bold mb-4 text-primary">
+                    Secure Checkout
+                </h2>
+
+                <hr>
+
+                <!-- Order Info -->
+                <div class="mb-3">
+                    <p class="text-muted mb-1">Order ID</p>
+                    <h6 class="fw-bold">{{ order.order_id }}</h6>
+                </div>
+
+                <!-- Product Images -->
+                <div class="mb-3">
+                    <p class="text-muted mb-2">Products</p>
+
+                    {% for item in order.items.all %}
+                        <div class="d-flex align-items-center mb-3 border rounded p-2">
+
+                            {% if item.product.product_image %}
+                                <img src="{{ item.product.product_image.url }}" 
+                                     alt="{{ item.product.name }}"
+                                     class="img-fluid rounded"
+                                     style="width:80px;height:80px;object-fit:cover;">
+                            {% else %}
+                                <div style="width:80px;height:80px;background:#eee;"
+                                     class="d-flex align-items-center justify-content-center rounded">
+                                    No Image
+                                </div>
+                            {% endif %}
+
+                            <div class="ms-3">
+                                <h6 class="mb-1">{{ item.product.name }}</h6>
+                                <small class="text-muted">
+                                    Qty: {{ item.quantity }}
+                                </small>
+                                <br>
+                                <strong class="text-success">
+                                    ₹ {{ item.price }}
+                                </strong>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Total -->
+                <div class="mb-3">
+                    <p class="text-muted mb-1">Total Amount</p>
+                    <h3 class="fw-bold text-success">₹ {{ order.total_amount }}</h3>
+                </div>
+
+                <hr>
+
+                <!-- Stripe Button -->
+                <div class="d-grid mt-4">
+                    <button id="checkout-button" class="btn pay-btn btn-lg fw-bold">
+                        <span id="btn-text">Pay Securely with Stripe</span>
+                        <span id="loading-spinner" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                    </button>
+                </div>
+
+                <p class="text-center text-muted mt-3 small">
+                    🔒 100% Secure Payment powered by Stripe
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stripe -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+var stripe = Stripe("{{ stripe_public_key }}");
+
+document.getElementById("checkout-button").addEventListener("click", function () {
+
+    document.getElementById("btn-text").innerText = "Processing...";
+    document.getElementById("loading-spinner").classList.remove("d-none");
+    this.disabled = true;
+
+    fetch("{% url 'create_stripe_session' order.order_id %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+        },
+    })
+    .then(response => response.json())
+    .then(session => {
+        return stripe.redirectToCheckout({ sessionId: session.id });
+    })
+    .catch(error => {
+        alert("Something went wrong. Please try again.");
+        console.error(error);
+        document.getElementById("btn-text").innerText = "Pay Securely with Stripe";
+        document.getElementById("loading-spinner").classList.add("d-none");
+        document.getElementById("checkout-button").disabled = false;
+    });
+});
+</script>
+
+<!-- Animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+
+/* Card animation hover */
+.card {
+    transition: transform 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Gradient Pay Button */
+.pay-btn {
+    background: linear-gradient(45deg, #635bff, #0d6efd);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+}
+.pay-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    background: linear-gradient(45deg, #0d6efd, #635bff);
+}
+
+/* Smooth fade in */
+.animate__animated {
+    animation-duration: 0.8s;
+}
+
+</style>
+
+{% endblock %}
