@@ -19,6 +19,9 @@ import cloudinary
 
 load_dotenv()
 
+print("CLOUD_NAME =", os.getenv("CLOUD_NAME"))
+print("API_KEY =", os.getenv("API_KEY"))
+print("API_SECRET =", os.getenv("API_SECRET"))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -191,17 +194,17 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-# CLOUDINARY_STORAGE={
-#     'CLOUD_NAME':os.getenv('CLOUD_NAME'),
-#     'API_KEY':os.getenv('API_KEY'),
-#     'API_SECRET':os.getenv('API_SECRET')
-#     }
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUD_NAME"),
+    "API_KEY": os.getenv("API_KEY"),
+    "API_SECRET": os.getenv("API_SECRET"),
+}
 
-cloudinary.config(
-    cloud_name=os.getenv("CLOUD_NAME"),
-    api_key=os.getenv("API_KEY"),
-    api_secret=os.getenv("API_SECRET"),
-)
+# cloudinary.config(
+#     cloud_name=os.getenv("CLOUD_NAME"),
+#     api_key=os.getenv("API_KEY"),
+#     api_secret=os.getenv("API_SECRET"),
+# )
 
 #DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
 
