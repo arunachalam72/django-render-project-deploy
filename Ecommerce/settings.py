@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-from django.conf import settings
 from datetime import timedelta
 import dj_database_url
 import cloudinary
@@ -201,7 +200,6 @@ CLOUDINARY_STORAGE = {
     "API_SECRET": os.getenv("API_SECRET"),
 }
 
-print(settings.CLOUDINARY_STORAGE)
 # cloudinary.config(
 #     cloud_name=os.getenv("CLOUD_NAME"),
 #     api_key=os.getenv("API_KEY"),
