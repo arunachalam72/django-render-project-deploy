@@ -211,7 +211,7 @@
               {% if cat.image %}
                   <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
               {% else %}
-                  <img src="/static/images/default-category.jpg" alt="{{ cat.name }}">
+                  <img src="/static/images/default.jpg" alt="{{ cat.name }}">
               {% endif %}
               <div class="category-name position-absolute bottom-0 start-0 text-white fw-bold ps-3 pb-2 fs-5">
                 {{ cat.name }}
@@ -234,7 +234,7 @@
             {% if prod.product_image %}
                 <img src="{{ prod.product_image.url }}" alt="{{ prod.name }}">
             {% else %}
-                <img src="/static/images/default-product.jpg" alt="{{ prod.name }}">
+                <img src="/static/images/default.jpg" alt="{{ prod.name }}">
             {% endif %}
           </a>
           <i class="fa-solid fa-heart favorite-icon {% if prod.id in favorite_ids %}active{% endif %}"
