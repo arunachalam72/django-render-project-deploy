@@ -208,6 +208,7 @@ def Profile_update(request, id):
 
     return render(request, 'EcommerceApp/Profile_edit.html', {'form': form})
 
+
 def About_page(request):
     return render(request,'EcommerceApp/About.html')
 
