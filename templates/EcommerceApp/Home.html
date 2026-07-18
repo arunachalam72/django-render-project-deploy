@@ -266,17 +266,13 @@ onclick="toggleFavorite(this)">
 <a href="{% url 'product_detail' prod.id %}">
 
 
-{% if prod.product_image %}
-
-<img src="{{ prod.product_image.url }}"
-class="product-img">
-
-{% else %}
-
-<img src="{% static 'images/default.jpg' %}"
-class="product-img">
-
-{% endif %}
+<div class="product-image-box">
+    {% if prod.product_image %}
+        <img src="{{ prod.product_image.url }}" class="product-img" alt="{{ prod.name }}">
+    {% else %}
+        <img src="{% static 'images/default.jpg' %}" class="product-img" alt="Default Image">
+    {% endif %}
+</div>
 
 
 </a>
@@ -384,22 +380,13 @@ View Product
 
 <a href="{% url 'product_detail' prod.id %}">
 
-
-{% if prod.product_image %}
-
-
-<img src="{{ prod.product_image.url }}"
-class="product-img">
-
-
-{% else %}
-
-
-<img src="{% static 'images/default.jpg' %}"
-class="product-img">
-
-
-{% endif %}
+<div class="product-image-box">
+    {% if prod.product_image %}
+        <img src="{{ prod.product_image.url }}" class="product-img" alt="{{ prod.name }}">
+    {% else %}
+        <img src="{% static 'images/default.jpg' %}" class="product-img" alt="Default Image">
+    {% endif %}
+</div>
 
 
 </a>
@@ -459,9 +446,6 @@ class="product-img">
 
 
 </div>
-
-
-
 
 
 
