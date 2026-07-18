@@ -501,7 +501,7 @@ def checkout(request):
 
     return render(request, 'EcommerceApp/Checkout.html', {
         'order': order,
-        'stripe_secret_key': settings.STRIPE_SECRET_KEY
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY
     })
 
 # @require_POST

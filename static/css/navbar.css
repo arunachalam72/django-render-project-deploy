@@ -1,0 +1,619 @@
+/* ================================
+   TRENDYSHOP MODERN NAVBAR
+================================ */
+
+*{
+    box-sizing:border-box;
+}
+
+
+.shop-navbar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:70px;
+
+    background:white;
+
+    z-index:9999;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+.nav-container{
+
+    max-width:1400px;
+
+    height:70px;
+
+    margin:auto;
+
+    padding:0 25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+}
+
+
+
+/* ================================
+   LOGO
+================================ */
+
+
+.brand-logo{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#2874f0;
+
+    text-decoration:none;
+
+    letter-spacing:.5px;
+
+    white-space:nowrap;
+
+}
+
+
+.brand-logo span{
+
+    color:#ff4d4d;
+
+}
+
+
+
+/* ================================
+   SEARCH
+================================ */
+
+
+.search-wrapper{
+
+    position:relative;
+
+    flex:1;
+
+    max-width:600px;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+.search-wrapper input{
+
+    width:100%;
+
+    height:45px;
+
+    border-radius:25px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+    padding:0 55px 0 20px;
+
+    font-size:15px;
+
+    background:#f7f7f7;
+
+    transition:.3s;
+
+}
+
+
+
+.search-wrapper input:focus{
+
+    background:white;
+
+    border-color:#2874f0;
+
+    box-shadow:
+    0 0 0 4px rgba(40,116,240,.15);
+
+}
+
+
+
+.search-btn{
+
+    position:absolute;
+
+    right:5px;
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    border:none;
+
+    background:#2874f0;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.search-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+
+
+/* ================================
+   SEARCH SUGGESTIONS
+================================ */
+
+
+.suggestions-box{
+
+    position:absolute;
+
+    top:50px;
+
+    left:0;
+
+    width:100%;
+
+    background:white;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    max-height:350px;
+
+    overflow-y:auto;
+
+    z-index:99999;
+
+}
+
+
+
+.suggestions-box a{
+
+    display:flex;
+
+    padding:10px;
+
+    text-decoration:none;
+
+    color:#333;
+
+    border-bottom:1px solid #eee;
+
+    transition:.2s;
+
+}
+
+
+
+.suggestions-box a:hover{
+
+    background:#f1f5ff;
+
+}
+
+
+
+/* ================================
+   NAV MENU
+================================ */
+
+
+.nav-menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+
+.nav-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    text-decoration:none;
+
+    color:#333;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+
+
+.nav-item i{
+
+    color:#2874f0;
+
+}
+
+
+
+.nav-item:hover{
+
+    background:#2874f0;
+
+    color:white;
+
+}
+
+
+
+.nav-item:hover i{
+
+    color:white;
+
+}
+
+
+
+/* ================================
+   LOGIN BUTTON
+================================ */
+
+
+.login-btn{
+
+    text-decoration:none;
+
+    background:#2874f0;
+
+    color:white;
+
+    padding:10px 25px;
+
+    border-radius:25px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+
+.login-btn:hover{
+
+    background:#125bd1;
+
+    color:white;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* ================================
+   PROFILE
+================================ */
+
+
+.profile-link{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#333;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+
+
+.profile-link img{
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #2874f0;
+
+    transition:.3s;
+
+}
+
+
+
+.profile-link img:hover{
+
+    transform:scale(1.1);
+
+}
+
+
+
+/* ================================
+   MOBILE BUTTONS
+================================ */
+
+
+.mobile-toggle,
+.mobile-close{
+
+    display:none;
+
+    border:none;
+
+    background:none;
+
+    font-size:25px;
+
+    color:#2874f0;
+
+}
+
+
+
+/* ================================
+   MOBILE DESIGN
+================================ */
+
+
+@media(max-width:1100px){
+
+
+.nav-container{
+
+    padding:0 15px;
+
+}
+
+
+.brand-logo{
+
+    font-size:24px;
+
+}
+
+
+.nav-menu{
+
+    gap:5px;
+
+}
+
+
+
+.nav-item{
+
+    padding:7px;
+
+    font-size:13px;
+
+}
+
+
+}
+
+
+
+@media(max-width:991px){
+
+
+.shop-navbar{
+
+    height:65px;
+
+}
+
+
+
+.nav-container{
+
+    height:65px;
+
+}
+
+
+
+.mobile-toggle{
+
+    display:block;
+
+    order:3;
+
+}
+
+
+
+.search-wrapper{
+
+    order:2;
+
+}
+
+
+
+.brand-logo{
+
+    order:1;
+
+}
+
+
+
+.nav-menu{
+
+    position:fixed;
+
+    top:0;
+
+    right:-320px;
+
+    width:300px;
+
+    height:100vh;
+
+    background:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    padding:80px 25px;
+
+    gap:15px;
+
+    box-shadow:-10px 0 30px rgba(0,0,0,.15);
+
+    transition:.4s;
+
+}
+
+
+
+.nav-menu.active{
+
+    right:0;
+
+}
+
+
+
+.mobile-close{
+
+    display:block;
+
+    position:absolute;
+
+    top:20px;
+
+    right:20px;
+
+}
+
+
+
+.nav-item{
+
+    width:100%;
+
+    font-size:16px;
+
+}
+
+
+
+.profile-link{
+
+    margin-bottom:15px;
+
+}
+
+
+
+.login-btn{
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+.search-wrapper{
+
+    position:absolute;
+
+    top:75px;
+
+    left:15px;
+
+    right:15px;
+
+    max-width:none;
+
+}
+
+
+
+.shop-navbar{
+
+    margin-bottom:70px;
+
+}
+
+
+
+.brand-logo{
+
+    font-size:22px;
+
+}
+
+
+}

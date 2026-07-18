@@ -1,0 +1,340 @@
+/* ==============================
+   GOOGLE FONT
+============================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f1f3f6;
+    overflow-x:hidden;
+}
+
+/* ==============================
+   LINKS
+============================== */
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ==============================
+   CONTAINER
+============================== */
+
+.container{
+    max-width:1400px;
+}
+
+/* ==============================
+   HERO SLIDER
+============================== */
+
+#heroCarousel{
+    border-radius:15px;
+    overflow:hidden;
+    background:white;
+}
+
+.hero-img{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+}
+
+.carousel-control-next,
+.carousel-control-prev{
+    width:5%;
+}
+
+.carousel-indicators button{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+}
+
+/* ==============================
+   CATEGORY BOX
+============================== */
+
+.category-box{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+}
+
+/* ==============================
+   CATEGORY CARD
+============================== */
+
+.category-card{
+    text-align:center;
+    transition:.35s;
+    cursor:pointer;
+}
+
+.category-card img{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:4px solid #f2f2f2;
+
+    transition:.4s;
+}
+
+.category-card h6{
+
+    margin-top:12px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#333;
+}
+
+.category-card:hover{
+
+    transform:translateY(-8px);
+}
+
+.category-card:hover img{
+
+    transform:scale(1.08);
+
+    border-color:#2874f0;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+/* ==============================
+   SWIPER
+============================== */
+
+.swiper{
+    padding-bottom:25px;
+}
+
+.swiper-pagination-bullet{
+
+    background:#2874f0;
+}
+
+.swiper-pagination-bullet-active{
+
+    width:24px;
+
+    border-radius:10px;
+}
+
+/* ==============================
+   OFFER BANNER
+============================== */
+
+.offer-banner{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    background:linear-gradient(135deg,#2874f0,#00c6ff);
+
+    color:white;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.offer-banner::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:350px;
+
+    height:350px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    top:-150px;
+
+    right:-120px;
+}
+
+.offer-banner h2{
+
+    font-size:40px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+}
+
+.offer-banner p{
+
+    font-size:18px;
+
+    opacity:.95;
+}
+
+.offer-banner .btn{
+
+    background:#ffc107;
+
+    color:#000;
+
+    font-weight:600;
+
+    padding:12px 35px;
+
+    border-radius:50px;
+
+    transition:.3s;
+}
+
+.offer-banner .btn:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+/* ==============================
+   SECTION TITLE
+============================== */
+
+.section-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+}
+
+.section-title h3{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:#222;
+}
+
+.section-title a{
+
+    color:#2874f0;
+
+    font-weight:600;
+}
+
+/* ==============================
+   CARD GRID
+============================== */
+
+.row{
+
+    --bs-gutter-x:1.3rem;
+}
+
+/* ==============================
+   SHADOWS
+============================== */
+
+.shadow{
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08)!important;
+}
+
+.shadow-lg{
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12)!important;
+}
+
+/* ==============================
+   WHITE BOXES
+============================== */
+
+.white-box{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:20px;
+}
+
+/* ==============================
+   BUTTONS
+============================== */
+
+.btn-primary{
+
+    background:#2874f0;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.btn-primary:hover{
+
+    background:#1d63d6;
+
+    transform:translateY(-2px);
+}
+
+/* ==============================
+   ANIMATION
+============================== */
+
+.fade-up{
+
+    animation:fadeUp .7s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+}
