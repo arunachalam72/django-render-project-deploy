@@ -224,34 +224,40 @@ def Contact_page(request):
 
 def Product_page(request, name):
 
-    # 🔐 JWT check (cookie-based)
     token = request.COOKIES.get("access_token")
-    print('token',token)
 
     if not token:
-        return redirect("login")   # or render login page
+        return redirect("login")
 
-    # Get all products for category
-    products = Product.objects.filter(category__name=name)
+    category_name = name.replace("-", " ")
 
-    # Price filter
+    products = Product.objects.filter(
+        category__name__iexact=category_name
+    )
+
     max_price = request.GET.get('max_price')
-    if max_price and max_price.isdigit():
-        products = products.filter(selling_price__lte=int(max_price))
 
-    # Favorites
+    if max_price and max_price.isdigit():
+        products = products.filter(
+            selling_price__lte=int(max_price)
+        )
+
     favorite_ids = []
+
     if request.user.is_authenticated:
         favorite_ids = Favorite.objects.filter(
             user=request.user
         ).values_list('product_id', flat=True)
 
-    return render(request, 'EcommerceApp/Product.html', {
-        'products': products,
-        'selected_price': max_price or 200000,
-        'favorite_ids': list(favorite_ids),
-    })
-
+    return render(
+        request,
+        'EcommerceApp/Product.html',
+        {
+            'products': products,
+            'selected_price': max_price or 200000,
+            'favorite_ids': list(favorite_ids),
+        }
+    )
 
 def product_detail(request, id):
     if request.user.is_authenticated:

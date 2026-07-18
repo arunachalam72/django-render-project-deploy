@@ -134,7 +134,9 @@ body{
 
                 <div class="category-content">
                     <h5>{{ prod.name }}</h5>
-                    <a href="{% url 'product' prod.name %}" class="shop-btn">Shop Now</a>
+                    <a href="{% url 'product' prod.name|slugify %}" class="shop-btn">
+                        Shop Now
+                    </a>
                 </div>
             </div>
         </div>
