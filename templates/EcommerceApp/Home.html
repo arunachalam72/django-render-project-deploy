@@ -254,13 +254,12 @@ SALE
 </div>
 
 
-
 <i class="fa-solid fa-heart favorite-icon 
 {% if prod.id in favorite_ids %}active{% endif %}"
 data-product-id="{{ prod.id }}"
+data-url="{% url 'toggle_favorite' prod.id %}"
 onclick="toggleFavorite(this)">
 </i>
-
 
 
 

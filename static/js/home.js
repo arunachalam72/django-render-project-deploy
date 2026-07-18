@@ -195,10 +195,7 @@ card.addEventListener("mouseleave",()=>{
 function toggleFavorite(element){
 
 
-const productId = element.dataset.productId;
-
-
-const url = `/toggle_favorite/${productId}/`;
+const url = element.dataset.url;
 
 
 

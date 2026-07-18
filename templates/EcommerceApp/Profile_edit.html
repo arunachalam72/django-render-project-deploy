@@ -17,12 +17,9 @@
       background-size: 1000% 1000%;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 30px;
       overflow-x: hidden;
       animation: moveGradient 10s ease infinite;
+      padding: 30px 15px;
     }
 
     @keyframes moveGradient {
@@ -194,6 +191,19 @@
         padding: 35px 25px;
       }
     }
+    @media (min-width:1200px){
+
+    .profile-container{
+        max-width:600px;
+        padding:60px 50px;
+    }
+
+    .profile-pic{
+        width:150px;
+        height:150px;
+    }
+
+}
   </style>
 </head>
 
