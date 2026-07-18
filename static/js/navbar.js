@@ -19,16 +19,19 @@ document.getElementById("navMenu");
 
 
 
+
+// OPEN MENU
+
 if(mobileToggle && navMenu){
 
 
-    mobileToggle.addEventListener("click",()=>{
+mobileToggle.addEventListener("click",()=>{
 
 
-        navMenu.classList.add("active");
+    navMenu.classList.add("active");
 
 
-    });
+});
 
 
 }
@@ -37,17 +40,20 @@ if(mobileToggle && navMenu){
 
 
 
+
+
+// CLOSE MENU
 
 if(mobileClose && navMenu){
 
 
-    mobileClose.addEventListener("click",()=>{
+mobileClose.addEventListener("click",()=>{
 
 
-        navMenu.classList.remove("active");
+    navMenu.classList.remove("active");
 
 
-    });
+});
 
 
 }
@@ -59,9 +65,7 @@ if(mobileClose && navMenu){
 
 
 
-// =================================
 // CLOSE MENU AFTER CLICK
-// =================================
 
 
 document
@@ -95,9 +99,7 @@ link.addEventListener("click",()=>{
 
 
 
-// =================================
 // CLOSE MENU OUTSIDE CLICK
-// =================================
 
 
 document.addEventListener("click",(event)=>{
@@ -108,18 +110,18 @@ return;
 
 
 
-const insideMenu =
+const clickedMenu =
 navMenu.contains(event.target);
 
 
 
-const insideToggle =
+const clickedButton =
 mobileToggle.contains(event.target);
 
 
 
 
-if(!insideMenu && !insideToggle){
+if(!clickedMenu && !clickedButton){
 
 
     navMenu.classList.remove("active");
@@ -138,14 +140,16 @@ if(!insideMenu && !insideToggle){
 
 
 
+
+
 // =================================
-// PRODUCT SEARCH
-// RUNS ONLY ON HOME PAGE
+// SEARCH SUGGESTIONS
 // =================================
 
 
 const searchInput =
 document.getElementById("searchInput");
+
 
 
 const suggestionsBox =
@@ -168,6 +172,7 @@ function(){
 
 let query =
 this.value.trim();
+
 
 
 
@@ -205,10 +210,12 @@ suggestionsBox.innerHTML="";
 
 
 
+
+
 if(data.length === 0){
 
 
-suggestionsBox.innerHTML = `
+suggestionsBox.innerHTML=`
 
 <div class="p-3 text-center">
 
@@ -223,6 +230,7 @@ return;
 
 
 }
+
 
 
 
@@ -260,6 +268,7 @@ new RegExp(
 
 
 
+
 suggestionsBox.innerHTML += `
 
 
@@ -269,14 +278,16 @@ class="suggestion-item">
 
 
 <img src="${product.image}"
+
 width="45"
+
 height="45"
+
 style="
 object-fit:cover;
 border-radius:8px;
 margin-right:12px;
 ">
-
 
 
 <div>
@@ -300,7 +311,6 @@ font-weight:600;
 </small>
 
 
-
 </div>
 
 
@@ -314,6 +324,7 @@ font-weight:600;
 
 
 });
+
 
 
 
@@ -348,6 +359,7 @@ error
 
 
 
+
 // =================================
 // CLOSE SEARCH DROPDOWN
 // =================================
@@ -355,7 +367,7 @@ error
 
 document.addEventListener(
 "click",
-function(e){
+function(event){
 
 
 
@@ -367,10 +379,11 @@ return;
 
 
 
+
 if(
-!searchInput.contains(e.target)
+!searchInput.contains(event.target)
 &&
-!suggestionsBox.contains(e.target)
+!suggestionsBox.contains(event.target)
 
 ){
 
@@ -391,6 +404,8 @@ suggestionsBox.innerHTML="";
 
 
 
+
+
 // =================================
 // ENTER SEARCH
 // =================================
@@ -402,16 +417,17 @@ if(searchInput){
 
 searchInput.addEventListener(
 "keypress",
-function(e){
+function(event){
 
 
 
-if(e.key === "Enter"){
+if(event.key === "Enter"){
 
 
 
 let value =
 searchInput.value.trim();
+
 
 
 
@@ -443,6 +459,7 @@ window.location.href =
 
 
 
+
 // =================================
 // NAVBAR SHADOW
 // =================================
@@ -450,6 +467,8 @@ window.location.href =
 
 const navbar =
 document.querySelector(".shop-navbar");
+
+
 
 
 
@@ -466,8 +485,10 @@ window.addEventListener(
 if(window.scrollY > 30){
 
 
+
 navbar.style.boxShadow =
 "0 8px 25px rgba(0,0,0,.15)";
+
 
 
 }

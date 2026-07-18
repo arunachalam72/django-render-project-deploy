@@ -10,6 +10,7 @@
 <div class="nav-container">
 
 
+
 <!-- LOGO -->
 
 <a href="{% url 'home' %}" class="brand-logo">
@@ -22,15 +23,12 @@ Trendy<span>Shop</span>
 
 
 
-<!-- SEARCH ONLY ON HOME PAGE -->
-
-{% if request.resolver_match.url_name == 'home' %}
-
+<!-- SEARCH ALWAYS VISIBLE -->
 
 <div class="search-wrapper">
 
 
-<input 
+<input
 type="search"
 id="searchInput"
 placeholder="Search products..."
@@ -47,31 +45,29 @@ autocomplete="off"
 
 
 
-
 <div id="suggestionsBox"
 class="suggestions-box">
 
 </div>
 
 
-
 </div>
 
 
-{% endif %}
 
 
 
 
 
 
-
-<!-- MOBILE MENU BUTTON -->
+<!-- MOBILE TOGGLE -->
 
 <button class="mobile-toggle"
 id="mobileToggle">
 
+
 <i class="fa-solid fa-bars"></i>
+
 
 </button>
 
@@ -82,19 +78,24 @@ id="mobileToggle">
 
 
 
-<!-- NAV MENU -->
+<!-- NAVIGATION MENU -->
 
 
 <div class="nav-menu"
 id="navMenu">
 
 
+
 <button class="mobile-close"
 id="mobileClose">
 
+
 <i class="fa-solid fa-xmark"></i>
 
+
 </button>
+
+
 
 
 
@@ -113,10 +114,6 @@ Home
 
 </a>
 
-
-
-
-
 <a href="{% url 'catagory' %}"
 class="nav-item">
 
@@ -130,10 +127,31 @@ Categories
 
 </a>
 
+<a href="{% url 'about' %}"
+class="nav-item">
 
 
+<i class="fa-solid fa-layer-group"></i>
+
+<span>
+About us
+</span>
 
 
+</a>
+
+<a href="{% url 'service' %}"
+class="nav-item">
+
+
+<i class="fa-solid fa-layer-group"></i>
+
+<span>
+Services
+</span>
+
+
+</a>
 
 
 {% if request.user.is_authenticated %}
@@ -141,7 +159,9 @@ Categories
 
 
 
-<!-- PROFILE ONLY WHEN LOGIN -->
+
+
+<!-- USER PROFILE -->
 
 
 <a href="{% url 'update' request.user.id %}"
@@ -162,6 +182,7 @@ class="profile-link">
 
 
 {% endif %}
+
 
 
 
@@ -200,6 +221,8 @@ Wishlist
 
 
 
+
+
 <a href="{% url 'cart' %}"
 class="nav-item">
 
@@ -212,6 +235,8 @@ Cart
 
 
 </a>
+
+
 
 
 
@@ -237,12 +262,17 @@ Orders
 
 
 
+
 <a href="{% url 'logout' %}"
 class="login-btn">
 
+
 Logout
 
+
 </a>
+
+
 
 
 
@@ -255,12 +285,16 @@ Logout
 
 
 
+
 <a href="{% url 'login' %}"
 class="login-btn">
 
+
 Login
 
+
 </a>
+
 
 
 
@@ -270,7 +304,9 @@ Login
 <a href="{% url 'register' %}"
 class="nav-item">
 
+
 Register
+
 
 </a>
 
@@ -280,6 +316,8 @@ Register
 
 
 {% endif %}
+
+
 
 
 
@@ -299,8 +337,6 @@ Register
 
 
 
-{% if request.resolver_match.url_name == 'home' %}
-
 <script>
 
 const productDetailUrl =
@@ -309,7 +345,5 @@ const productDetailUrl =
 </script>
 
 
+
 <script src="{% static 'js/navbar.js' %}"></script>
-
-
-{% endif %}

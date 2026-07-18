@@ -8,8 +8,6 @@
 }
 
 
-/* Fixed navbar space */
-
 body{
 
     padding-top:70px;
@@ -35,13 +33,14 @@ body{
 
     height:70px;
 
-    background:#fff;
+    background:white;
 
     z-index:9999;
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 
 }
+
 
 
 
@@ -68,12 +67,14 @@ body{
 
 
 
+
 /* ================================
    LOGO
 ================================ */
 
 
 .brand-logo{
+
 
     font-size:28px;
 
@@ -88,12 +89,13 @@ body{
 }
 
 
-
 .brand-logo span{
 
     color:#ff4d4d;
 
 }
+
+
 
 
 
@@ -106,6 +108,7 @@ body{
 
 .search-wrapper{
 
+
     flex:1;
 
     max-width:600px;
@@ -117,6 +120,7 @@ body{
 
 
 .search-wrapper input{
+
 
     width:100%;
 
@@ -132,15 +136,18 @@ body{
 
     outline:none;
 
+
 }
 
 
 
 .search-wrapper input:focus{
 
-    background:#fff;
+
+    background:white;
 
     border-color:#2874f0;
+
 
 }
 
@@ -148,7 +155,9 @@ body{
 
 
 
+
 .search-btn{
+
 
     position:absolute;
 
@@ -168,7 +177,9 @@ body{
 
     color:white;
 
+
 }
+
 
 
 
@@ -183,6 +194,7 @@ body{
 
 .suggestions-box{
 
+
     position:absolute;
 
     top:52px;
@@ -195,16 +207,15 @@ body{
 
     border-radius:12px;
 
-    overflow:hidden;
-
     max-height:350px;
 
     overflow-y:auto;
 
     box-shadow:0 10px 30px rgba(0,0,0,.15);
 
-}
+    z-index:99999;
 
+}
 
 
 
@@ -213,17 +224,19 @@ body{
 
 
 /* ================================
-   MENU
+   NAV MENU
 ================================ */
 
 
 .nav-menu{
+
 
     display:flex;
 
     align-items:center;
 
     gap:10px;
+
 
 }
 
@@ -232,6 +245,7 @@ body{
 
 
 .nav-item{
+
 
     display:flex;
 
@@ -245,11 +259,12 @@ body{
 
     color:#333;
 
-    font-weight:600;
-
     text-decoration:none;
 
     font-size:14px;
+
+    font-weight:600;
+
 
 }
 
@@ -265,9 +280,11 @@ body{
 
 .nav-item:hover{
 
+
     background:#2874f0;
 
     color:white;
+
 
 }
 
@@ -292,6 +309,7 @@ body{
 
 .profile-link{
 
+
     display:flex;
 
     align-items:center;
@@ -304,11 +322,13 @@ body{
 
     font-weight:600;
 
+
 }
 
 
 
 .profile-link img{
+
 
     width:38px;
 
@@ -320,6 +340,7 @@ body{
 
     border:2px solid #2874f0;
 
+
 }
 
 
@@ -327,24 +348,27 @@ body{
 
 
 
+
 /* ================================
-   LOGIN
+   LOGIN BUTTON
 ================================ */
 
 
 .login-btn{
 
+
     background:#2874f0;
 
     color:white;
-
-    text-decoration:none;
 
     padding:10px 25px;
 
     border-radius:25px;
 
+    text-decoration:none;
+
     font-weight:600;
+
 
 }
 
@@ -352,9 +376,11 @@ body{
 
 .login-btn:hover{
 
-    color:white;
 
     background:#125bd1;
+
+    color:white;
+
 
 }
 
@@ -363,13 +389,16 @@ body{
 
 
 
+
+
 /* ================================
-   MOBILE BUTTON
+   MOBILE BUTTONS
 ================================ */
 
 
 .mobile-toggle,
 .mobile-close{
+
 
     display:none;
 
@@ -381,7 +410,11 @@ body{
 
     font-size:25px;
 
+
 }
+
+
+
 
 
 
@@ -397,7 +430,9 @@ body{
 
 .nav-container{
 
+
     padding:0 15px;
+
 
 }
 
@@ -405,7 +440,9 @@ body{
 
 .brand-logo{
 
-    font-size:24px;
+
+    font-size:23px;
+
 
 }
 
@@ -413,12 +450,15 @@ body{
 
 .nav-item span{
 
+
     display:none;
 
+
 }
 
 
 }
+
 
 
 
@@ -438,37 +478,37 @@ body{
 
 .shop-navbar{
 
+
     height:65px;
 
+
 }
+
 
 
 
 .nav-container{
 
+
     height:65px;
 
-    padding:0 15px;
+    padding:0 12px;
 
-    justify-content:space-between;
+    gap:8px;
+
 
 }
 
-
-
-.mobile-toggle{
-
-    display:block;
-
-    order:3;
-
-}
 
 
 
 .brand-logo{
 
-    order:1;
+
+    font-size:20px;
+
+    flex-shrink:0;
+
 
 }
 
@@ -478,23 +518,85 @@ body{
 
 .search-wrapper{
 
-    order:2;
+
+    flex:1;
+
+    max-width:none;
+
 
 }
 
 
 
+
+
+.search-wrapper input{
+
+
+    height:40px;
+
+    font-size:13px;
+
+    padding-left:15px;
+
+
+}
+
+
+
+
+
+.search-btn{
+
+
+    width:34px;
+
+    height:34px;
+
+    top:3px;
+
+
+}
+
+
+
+
+
+
+
+.mobile-toggle{
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:40px;
+
+    height:40px;
+
+    flex-shrink:0;
+
+
+}
+
+
+
+
+
+
 .nav-menu{
+
 
     position:fixed;
 
     top:0;
 
-    right:-100%;
+    right:-320px;
 
-    width:85%;
-
-    max-width:320px;
+    width:300px;
 
     height:100vh;
 
@@ -510,33 +612,44 @@ body{
 
     gap:15px;
 
-    transition:.3s;
+    transition:.35s;
 
     box-shadow:-10px 0 30px rgba(0,0,0,.2);
 
+
 }
+
 
 
 
 .nav-menu.active{
 
+
     right:0;
 
+
 }
+
+
 
 
 
 .mobile-close{
 
+
     display:block;
 
     position:absolute;
 
-    right:20px;
-
     top:20px;
 
+    right:20px;
+
+
 }
+
+
+
 
 
 
@@ -544,21 +657,30 @@ body{
 .profile-link,
 .login-btn{
 
+
     width:100%;
 
+
 }
+
 
 
 
 .nav-item span{
 
+
     display:inline;
 
+
+}
+
+
+
 }
 
 
 
-}
+
 
 
 
@@ -569,64 +691,64 @@ body{
 ================================ */
 
 
-@media(max-width:600px){
-
-
-
-body{
-
-    padding-top:115px;
-
-}
-
-
-
-.shop-navbar{
-
-    height:110px;
-
-}
+@media(max-width:480px){
 
 
 
 .nav-container{
 
-    height:110px;
 
-    flex-wrap:wrap;
+    padding:0 8px;
 
-    padding:10px 15px;
 
 }
+
 
 
 
 .brand-logo{
 
-    font-size:22px;
+
+    font-size:17px;
+
 
 }
 
 
-
-/* Only home page search */
-
-.search-wrapper{
-
-    width:100%;
-
-    flex-basis:100%;
-
-}
 
 
 
 .search-wrapper input{
 
-    height:42px;
+
+    font-size:12px;
+
 
 }
 
+
+
+
+
+.search-wrapper input::placeholder{
+
+
+    font-size:11px;
+
+
+}
+
+
+
+
+
+.mobile-toggle{
+
+
+    width:35px;
+
+
+}
 
 
 }
