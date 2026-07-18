@@ -1,271 +1,758 @@
 {% extends 'EcommerceApp/Base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edit Profile | Trendify</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 {% block content %}
-  <style>
-    /* 🌈 Animated Gradient Background */
-    body {
-      background: linear-gradient(270deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb, #fbc2eb);
-      background-size: 1000% 1000%;
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-      animation: moveGradient 10s ease infinite;
-      padding: 30px 15px;
+
+<style>
+
+.profile-page {
+
+    min-height: calc(100vh - 80px);
+
+    background:
+    linear-gradient(
+        270deg,
+        #ff9a9e,
+        #fad0c4,
+        #a1c4fd,
+        #c2e9fb,
+        #fbc2eb
+    );
+
+    background-size:1000% 1000%;
+
+    animation:backgroundMove 12s ease infinite;
+
+    padding:40px 15px;
+
+}
+
+
+
+@keyframes backgroundMove {
+
+    0%{
+        background-position:0% 50%;
     }
 
-    @keyframes moveGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    50%{
+        background-position:100% 50%;
     }
 
-    /* Profile Container */
-    .profile-container {
-      position: relative;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 50px 40px;
-      border-radius: 25px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      max-width: 550px;
-      width: 100%;
-      margin-top: 50px;
-      animation: fadeUp 1s ease forwards;
-      transition: transform 0.6s ease;
-    }
-
-    .profile-container:hover {
-      transform: rotateY(3deg) rotateX(2deg) scale(1.02);
-    }
-
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(60px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .profile-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    /* Animated Profile Pic */
-    .profile-pic {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      margin: 0 auto;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 4px solid transparent;
-      background: linear-gradient(45deg, #007bff, #ff7e5f, #00b4d8, #f72585);
-      background-size: 400% 400%;
-      animation: borderGlow 4s linear infinite;
-      transition: transform 0.5s ease;
-    }
-
-    @keyframes borderGlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .profile-pic img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      animation: floatPic 4s ease-in-out infinite;
-    }
-
-    @keyframes floatPic {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .upload-icon {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      background: linear-gradient(135deg, #0d6efd, #00b4d8);
-      color: white;
-      border-radius: 50%;
-      padding: 10px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .upload-icon:hover {
-      transform: rotate(10deg) scale(1.2);
-      box-shadow: 0 6px 18px rgba(0, 183, 255, 0.4);
-    }
-
-    .profile-pic input[type="file"] {
-      display: none;
-    }
-
-    h3 {
-      font-weight: 700;
-      color: #0d6efd;
-      margin-top: 25px;
-      letter-spacing: 1px;
-      animation: fadeInText 1.2s ease forwards;
-    }
-
-    @keyframes fadeInText {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 🌟 Input Fields */
-    .form-control {
-      border-radius: 12px;
-      padding: 12px 15px;
-      border: 2px solid #ccc;
-      transition: all 0.4s ease;
-      position: relative;
-      background: #fefefe;
-    }
-
-    /* Input Focus Animation */
-    .form-control:focus {
-      border-color: transparent;
-      outline: none;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd);
-      background-size: 200% 200%;
-      animation: gradientBorder 3s ease infinite, pulse 1.2s ease infinite;
-      color: #333;
-      transform: scale(1.05) rotateZ(1deg);
-      box-shadow: 0 0 18px rgba(255, 120, 200, 0.4);
-    }
-
-    @keyframes gradientBorder {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 8px rgba(255, 150, 200, 0.3); }
-      50% { box-shadow: 0 0 20px rgba(255, 150, 200, 0.7); }
-    }
-
-    /* ✨ Save Button */
-    .btn-save {
-      position: relative;
-      background: linear-gradient(135deg, #0d6efd, #00b4d8, #ff7e5f, #f72585);
-      background-size: 300% 300%;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 12px 0;
-      font-weight: 600;
-      width: 100%;
-      margin-top: 15px;
-      animation: gradientMove 5s ease infinite;
-      transition: all 0.4s ease;
-      box-shadow: 0 6px 18px rgba(0, 110, 255, 0.25);
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .btn-save:hover {
-      transform: scale(1.08) rotate(-2deg);
-      box-shadow: 0 12px 25px rgba(13, 110, 253, 0.4);
-    }
-
-    @media (max-width: 576px) {
-      .profile-container {
-        padding: 35px 25px;
-      }
-    }
-    @media (min-width:1200px){
-
-    .profile-container{
-        max-width:600px;
-        padding:60px 50px;
-    }
-
-    .profile-pic{
-        width:150px;
-        height:150px;
+    100%{
+        background-position:0% 50%;
     }
 
 }
-  </style>
-</head>
 
-<body>
-  <div class="profile-container">
-    <form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div class="profile-header">
-    <div class="profile-pic">
-      {% if request.user.profile_image %}
-        <img id="profileImage" src="{{ request.user.profile_image.url }}" alt="Profile" />
-      {% else %}
-        <img id="profileImage" src="{% static 'images/default_profile.jpg' %}" alt="Profile" />
-      {% endif %}
 
-      {{ form.profile_image }}
 
-      <label for="{{ form.profile_image.id_for_label }}" class="upload-icon">
-        <i class="fas fa-camera"></i>
-      </label>
-    </div>
-    <h3>Edit Profile</h3>
-  </div>
 
-  <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
-    {{ form.username }}
-  </div>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email Address</label>
-    {{ form.email }}
-  </div>
-  <div class="mb-3">
-    <label for="phone" class="form-label">Phone Number</label>
-    {{ form.phone_number }}
-  </div>
-  <div class="mb-3">
-    <label for="bio" class="form-label">Bio</label>
-    {{ form.bio }}
-  </div>
+.profile-card {
 
-  <button type="submit" class="btn-save">Save Changes</button>
+    width:100%;
+
+    max-width:600px;
+
+    margin:auto;
+
+    background:rgba(255,255,255,0.95);
+
+    border-radius:25px;
+
+    padding:clamp(25px,5vw,60px);
+
+    box-shadow:
+    0 15px 45px rgba(0,0,0,.2);
+
+    animation:slideUp .8s ease;
+
+}
+
+
+
+
+
+@keyframes slideUp {
+
+from{
+
+opacity:0;
+
+transform:translateY(50px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+
+
+.profile-header{
+
+text-align:center;
+
+margin-bottom:35px;
+
+}
+
+
+
+
+
+.profile-image-container{
+
+
+width:clamp(100px,22vw,150px);
+
+height:clamp(100px,22vw,150px);
+
+
+margin:auto;
+
+
+padding:4px;
+
+
+border-radius:50%;
+
+
+background:
+linear-gradient(
+45deg,
+#007bff,
+#ff7e5f,
+#00b4d8,
+#f72585
+);
+
+
+background-size:400% 400%;
+
+
+animation:imageBorder 5s infinite;
+
+
+
+position:relative;
+
+
+}
+
+
+
+
+
+@keyframes imageBorder {
+
+
+0%{
+
+background-position:0% 50%;
+
+}
+
+50%{
+
+background-position:100% 50%;
+
+}
+
+100%{
+
+background-position:0% 50%;
+
+}
+
+
+}
+
+
+
+
+
+.profile-image-container img{
+
+
+height:100%;
+
+width:100%;
+
+
+border-radius:50%;
+
+
+object-fit:cover;
+
+
+background:white;
+
+
+}
+
+
+
+
+
+.profile-image-container input[type="file"]{
+
+
+display:none;
+
+
+}
+
+
+
+
+
+.camera-button{
+
+
+position:absolute;
+
+
+right:5px;
+
+bottom:5px;
+
+
+height:40px;
+
+width:40px;
+
+
+border-radius:50%;
+
+
+background:#0d6efd;
+
+
+color:white;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+cursor:pointer;
+
+
+box-shadow:
+0 5px 15px rgba(0,0,0,.3);
+
+
+transition:.3s;
+
+
+}
+
+
+
+
+.camera-button:hover{
+
+
+transform:scale(1.15);
+
+
+}
+
+
+
+
+
+.profile-title{
+
+
+color:#0d6efd;
+
+
+font-weight:700;
+
+
+font-size:clamp(22px,4vw,32px);
+
+
+margin-top:20px;
+
+
+}
+
+
+
+
+
+.form-label{
+
+
+font-weight:600;
+
+
+color:#333;
+
+
+}
+
+
+
+
+
+.form-control{
+
+
+width:100%;
+
+
+border-radius:12px;
+
+
+padding:12px 15px;
+
+
+border:2px solid #ddd;
+
+
+transition:.3s;
+
+
+}
+
+
+
+
+.form-control:focus{
+
+
+border-color:#0d6efd;
+
+
+box-shadow:
+0 0 15px rgba(13,110,253,.3);
+
+
+}
+
+
+
+
+
+.save-button{
+
+
+width:100%;
+
+
+padding:14px;
+
+
+border:none;
+
+
+border-radius:12px;
+
+
+margin-top:15px;
+
+
+color:white;
+
+
+font-weight:700;
+
+
+font-size:16px;
+
+
+background:
+linear-gradient(
+135deg,
+#0d6efd,
+#00b4d8,
+#ff7e5f,
+#f72585
+);
+
+
+background-size:300% 300%;
+
+
+animation:
+buttonMove 5s infinite;
+
+
+transition:.3s;
+
+
+}
+
+
+
+
+
+@keyframes buttonMove {
+
+
+0%{
+
+background-position:0% 50%;
+
+}
+
+
+50%{
+
+background-position:100% 50%;
+
+}
+
+
+100%{
+
+background-position:0% 50%;
+
+}
+
+
+}
+
+
+
+
+
+.save-button:hover{
+
+
+transform:translateY(-3px);
+
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.25);
+
+
+}
+
+
+
+
+
+@media(max-width:768px){
+
+
+.profile-page{
+
+padding:25px 10px;
+
+}
+
+
+.profile-card{
+
+border-radius:20px;
+
+}
+
+
+}
+
+
+
+
+@media(max-width:400px){
+
+
+.profile-card{
+
+
+padding:20px 15px;
+
+
+}
+
+
+
+.camera-button{
+
+
+width:32px;
+
+height:32px;
+
+font-size:13px;
+
+
+}
+
+
+}
+
+
+
+</style>
+
+
+
+
+
+<div class="profile-page">
+
+
+<div class="profile-card">
+
+
+
+<form method="POST" enctype="multipart/form-data">
+
+
+{% csrf_token %}
+
+
+
+<div class="profile-header">
+
+
+<div class="profile-image-container">
+
+
+
+{% if request.user.profile_image %}
+
+
+<img 
+id="profileImage"
+src="{{request.user.profile_image.url}}"
+alt="Profile">
+
+
+{% else %}
+
+
+<img 
+id="profileImage"
+src="{% static 'images/default_profile.jpg' %}"
+alt="Profile">
+
+
+{% endif %}
+
+
+
+
+{{form.profile_image}}
+
+
+
+<label 
+for="{{form.profile_image.id_for_label}}"
+class="camera-button">
+
+
+<i class="fas fa-camera"></i>
+
+
+</label>
+
+
+</div>
+
+
+
+
+<h3 class="profile-title">
+
+Edit Profile
+
+</h3>
+
+
+</div>
+
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Username
+
+</label>
+
+
+{{form.username}}
+
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Email Address
+
+</label>
+
+
+{{form.email}}
+
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Phone Number
+
+</label>
+
+
+{{form.phone_number}}
+
+
+</div>
+
+
+
+
+
+<div class="mb-3">
+
+
+<label class="form-label">
+
+Bio
+
+</label>
+
+
+{{form.bio}}
+
+
+</div>
+
+
+
+
+
+
+<button 
+type="submit"
+class="save-button">
+
+
+Save Changes
+
+
+</button>
+
+
+
+
 </form>
 
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Profile image preview
-    const imageUpload = document.getElementById('id_profile_image');
-    const profileImage = document.getElementById('profileImage');
-    if (imageUpload) {
-      imageUpload.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = e => profileImage.src = e.target.result;
-          reader.readAsDataURL(file);
-        }
-      });
-    }
-  </script>
-</body>
-</html>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+
+const imageUpload =
+document.getElementById(
+"id_profile_image"
+);
+
+
+
+const profileImage =
+document.getElementById(
+"profileImage"
+);
+
+
+
+
+
+if(imageUpload){
+
+
+imageUpload.addEventListener(
+"change",
+function(){
+
+
+const file=this.files[0];
+
+
+if(file){
+
+
+const reader=new FileReader();
+
+
+
+reader.onload=function(e){
+
+
+profileImage.src=e.target.result;
+
+
+};
+
+
+
+reader.readAsDataURL(file);
+
+
+}
+
+
+});
+
+
+}
+
+
+
+</script>
+
+
+
 {% endblock content %}
