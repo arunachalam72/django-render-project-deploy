@@ -47,19 +47,19 @@ body{
 
 .nav-container{
 
-    max-width:1400px;
+    max-width:1600px;
 
     height:70px;
 
     margin:auto;
 
-    padding:0 25px;
+    padding:0 30px;
 
     display:flex;
 
     align-items:center;
 
-    gap:20px;
+    gap:25px;
 
 }
 
@@ -75,8 +75,7 @@ body{
 
 .brand-logo{
 
-
-    font-size:28px;
+    font-size:30px;
 
     font-weight:800;
 
@@ -101,6 +100,7 @@ body{
 
 
 
+
 /* ================================
    SEARCH
 ================================ */
@@ -108,14 +108,17 @@ body{
 
 .search-wrapper{
 
-
     flex:1;
 
-    max-width:600px;
+    max-width:850px;
+
+    min-width:350px;
 
     position:relative;
 
 }
+
+
 
 
 
@@ -124,7 +127,7 @@ body{
 
     width:100%;
 
-    height:45px;
+    height:48px;
 
     border-radius:25px;
 
@@ -132,12 +135,15 @@ body{
 
     background:#f7f7f7;
 
-    padding:0 55px 0 20px;
+    padding:0 60px 0 22px;
 
     outline:none;
 
+    font-size:15px;
+
 
 }
+
 
 
 
@@ -148,9 +154,11 @@ body{
 
     border-color:#2874f0;
 
+    box-shadow:
+    0 0 0 4px rgba(40,116,240,.12);
+
 
 }
-
 
 
 
@@ -163,7 +171,7 @@ body{
 
     right:5px;
 
-    top:3px;
+    top:5px;
 
     width:38px;
 
@@ -177,6 +185,8 @@ body{
 
     color:white;
 
+    cursor:pointer;
+
 
 }
 
@@ -186,9 +196,8 @@ body{
 
 
 
-
 /* ================================
-   SEARCH SUGGESTION
+   SEARCH SUGGESTIONS
 ================================ */
 
 
@@ -197,7 +206,7 @@ body{
 
     position:absolute;
 
-    top:52px;
+    top:55px;
 
     left:0;
 
@@ -215,6 +224,7 @@ body{
 
     z-index:99999;
 
+
 }
 
 
@@ -223,8 +233,9 @@ body{
 
 
 
+
 /* ================================
-   NAV MENU
+   MENU
 ================================ */
 
 
@@ -235,7 +246,9 @@ body{
 
     align-items:center;
 
-    gap:10px;
+    gap:8px;
+
+    flex-shrink:0;
 
 
 }
@@ -253,7 +266,7 @@ body{
 
     gap:6px;
 
-    padding:8px 12px;
+    padding:8px 10px;
 
     border-radius:8px;
 
@@ -277,7 +290,6 @@ body{
 }
 
 
-
 .nav-item:hover{
 
 
@@ -287,7 +299,6 @@ body{
 
 
 }
-
 
 
 .nav-item:hover i{
@@ -322,8 +333,11 @@ body{
 
     font-weight:600;
 
+    white-space:nowrap;
+
 
 }
+
 
 
 
@@ -349,8 +363,9 @@ body{
 
 
 
+
 /* ================================
-   LOGIN BUTTON
+   LOGIN
 ================================ */
 
 
@@ -361,13 +376,15 @@ body{
 
     color:white;
 
-    padding:10px 25px;
+    padding:10px 22px;
 
     border-radius:25px;
 
     text-decoration:none;
 
     font-weight:600;
+
+    white-space:nowrap;
 
 
 }
@@ -376,13 +393,12 @@ body{
 
 .login-btn:hover{
 
-
     background:#125bd1;
 
     color:white;
 
-
 }
+
 
 
 
@@ -420,29 +436,37 @@ body{
 
 
 
+
 /* ================================
-   TABLET
+   LAPTOP
 ================================ */
 
 
-@media(max-width:1100px){
+@media(max-width:1300px){
 
 
 .nav-container{
 
+    padding:0 20px;
 
-    padding:0 15px;
+    gap:15px;
 
+}
+
+
+.search-wrapper{
+
+    max-width:650px;
+
+    min-width:280px;
 
 }
 
 
 
-.brand-logo{
+.nav-item{
 
-
-    font-size:23px;
-
+    padding:7px;
 
 }
 
@@ -450,9 +474,7 @@ body{
 
 .nav-item span{
 
-
     display:none;
-
 
 }
 
@@ -468,22 +490,18 @@ body{
 
 
 /* ================================
-   MOBILE
+   TABLET + MOBILE
 ================================ */
 
 
 @media(max-width:991px){
 
 
-
 .shop-navbar{
-
 
     height:65px;
 
-
 }
-
 
 
 
@@ -504,24 +522,20 @@ body{
 
 .brand-logo{
 
-
     font-size:20px;
 
-    flex-shrink:0;
-
-
 }
-
-
 
 
 
 .search-wrapper{
 
 
-    flex:1;
-
     max-width:none;
+
+    min-width:0;
+
+    flex:1;
 
 
 }
@@ -537,12 +551,7 @@ body{
 
     font-size:13px;
 
-    padding-left:15px;
-
-
 }
-
-
 
 
 
@@ -557,9 +566,6 @@ body{
 
 
 }
-
-
-
 
 
 
@@ -581,7 +587,6 @@ body{
 
 
 }
-
 
 
 
@@ -621,16 +626,11 @@ body{
 
 
 
-
 .nav-menu.active{
-
 
     right:0;
 
-
 }
-
-
 
 
 
@@ -651,33 +651,25 @@ body{
 
 
 
-
-
 .nav-item,
 .profile-link,
 .login-btn{
 
-
     width:100%;
 
-
 }
-
 
 
 
 .nav-item span{
 
-
     display:inline;
 
-
 }
 
 
 
 }
-
 
 
 
@@ -694,59 +686,41 @@ body{
 @media(max-width:480px){
 
 
-
 .nav-container{
-
 
     padding:0 8px;
 
-
 }
-
 
 
 
 .brand-logo{
 
-
     font-size:17px;
 
-
 }
-
-
 
 
 
 .search-wrapper input{
 
-
     font-size:12px;
 
-
 }
-
-
 
 
 
 .search-wrapper input::placeholder{
 
-
     font-size:11px;
-
 
 }
 
 
 
-
-
 .mobile-toggle{
 
-
     width:35px;
-
 
 }
 

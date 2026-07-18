@@ -19,20 +19,15 @@ document.getElementById("navMenu");
 
 
 
-
-// OPEN MENU
+// OPEN MOBILE MENU
 
 if(mobileToggle && navMenu){
 
+    mobileToggle.addEventListener("click",()=>{
 
-mobileToggle.addEventListener("click",()=>{
+        navMenu.classList.add("active");
 
-
-    navMenu.classList.add("active");
-
-
-});
-
+    });
 
 }
 
@@ -42,19 +37,15 @@ mobileToggle.addEventListener("click",()=>{
 
 
 
-// CLOSE MENU
+// CLOSE MOBILE MENU
 
 if(mobileClose && navMenu){
 
+    mobileClose.addEventListener("click",()=>{
 
-mobileClose.addEventListener("click",()=>{
+        navMenu.classList.remove("active");
 
-
-    navMenu.classList.remove("active");
-
-
-});
-
+    });
 
 }
 
@@ -75,22 +66,21 @@ document
 .forEach(link=>{
 
 
-link.addEventListener("click",()=>{
+    link.addEventListener("click",()=>{
 
 
-    if(window.innerWidth <= 991 && navMenu){
+        if(window.innerWidth <= 991 && navMenu){
+
+            navMenu.classList.remove("active");
+
+        }
 
 
-        navMenu.classList.remove("active");
-
-
-    }
+    });
 
 
 });
 
-
-});
 
 
 
@@ -105,30 +95,26 @@ link.addEventListener("click",()=>{
 document.addEventListener("click",(event)=>{
 
 
-if(!navMenu || !mobileToggle)
-return;
+    if(!navMenu || !mobileToggle)
+        return;
 
 
 
-const clickedMenu =
-navMenu.contains(event.target);
+    const clickedInsideMenu =
+    navMenu.contains(event.target);
 
 
 
-const clickedButton =
-mobileToggle.contains(event.target);
+    const clickedToggle =
+    mobileToggle.contains(event.target);
 
 
 
+    if(!clickedInsideMenu && !clickedToggle){
 
-if(!clickedMenu && !clickedButton){
+        navMenu.classList.remove("active");
 
-
-    navMenu.classList.remove("active");
-
-
-}
-
+    }
 
 
 });
@@ -142,8 +128,9 @@ if(!clickedMenu && !clickedButton){
 
 
 
+
 // =================================
-// SEARCH SUGGESTIONS
+// PRODUCT SEARCH
 // =================================
 
 
@@ -151,9 +138,9 @@ const searchInput =
 document.getElementById("searchInput");
 
 
-
 const suggestionsBox =
 document.getElementById("suggestionsBox");
+
 
 
 
@@ -170,186 +157,190 @@ function(){
 
 
 
-let query =
-this.value.trim();
+    let query =
+    this.value.trim();
 
 
 
 
+    if(query.length < 2){
 
-if(query.length < 2){
 
+        suggestionsBox.innerHTML="";
 
-    suggestionsBox.innerHTML="";
+        return;
 
-    return;
 
+    }
 
-}
 
 
 
 
 
 
-fetch(`/search-suggestions/?q=${query}`)
+    fetch(`/search-suggestions/?q=${query}`)
 
 
 
-.then(response=>response.json())
+    .then(response=>response.json())
 
 
 
-.then(data=>{
+    .then(data=>{
 
 
 
-suggestionsBox.innerHTML="";
+        suggestionsBox.innerHTML="";
 
 
 
 
 
+        if(data.length === 0){
 
 
-if(data.length === 0){
 
+            suggestionsBox.innerHTML = `
 
-suggestionsBox.innerHTML=`
+            <div class="p-3 text-center">
 
-<div class="p-3 text-center">
+            No products found
 
-No products found
+            </div>
 
-</div>
+            `;
 
-`;
 
+            return;
 
-return;
 
+        }
 
-}
 
 
 
 
 
 
+        data.forEach(product=>{
 
 
-data.forEach(product=>{
 
+            let url =
+            productDetailUrl.replace(
+                "0",
+                product.id
+            );
 
 
-let url =
-productDetailUrl.replace(
-"0",
-product.id
-);
 
 
 
 
+            let highlighted =
+            product.name.replace(
 
-let highlighted =
-product.name.replace(
+                new RegExp(
+                    `(${query})`,
+                    "gi"
+                ),
 
-new RegExp(
-`(${query})`,
-"gi"
-),
+                "<strong>$1</strong>"
 
-"<strong>$1</strong>"
+            );
 
-);
 
 
 
 
 
 
-suggestionsBox.innerHTML += `
 
+            suggestionsBox.innerHTML += `
 
-<a href="${url}"
-class="suggestion-item">
 
+            <a href="${url}"
+            class="suggestion-item">
 
 
-<img src="${product.image}"
 
-width="45"
+            <img src="${product.image}"
 
-height="45"
+            width="45"
 
-style="
-object-fit:cover;
-border-radius:8px;
-margin-right:12px;
-">
+            height="45"
 
+            style="
+            object-fit:cover;
+            border-radius:8px;
+            margin-right:12px;
+            ">
 
-<div>
 
 
-<div>
+            <div>
 
-${highlighted}
 
-</div>
+            <div>
 
+            ${highlighted}
 
+            </div>
 
-<small style="
-color:#2874f0;
-font-weight:600;
-">
 
-₹${product.price}
 
-</small>
 
+            <small style="
+            color:#2874f0;
+            font-weight:600;
+            ">
 
-</div>
+            ₹${product.price}
 
+            </small>
 
 
-</a>
 
+            </div>
 
 
-`;
+
+
+            </a>
+
+
+            `;
+
+
+
+        });
+
+
+
+    })
+
+
+
+    .catch(error=>{
+
+
+        console.log(
+            "Search Error:",
+            error
+        );
+
+
+    });
 
 
 
 });
 
 
-
-
-})
-
-
-
-.catch(error=>{
-
-
-console.log(
-"Search Error:",
-error
-);
-
-
-});
-
-
-
-});
-
-
-
 }
+
+
 
 
 
@@ -367,35 +358,41 @@ error
 
 document.addEventListener(
 "click",
-function(event){
+(event)=>{
 
 
-
-if(!searchInput || !suggestionsBox)
-
-return;
+    if(!searchInput || !suggestionsBox)
+        return;
 
 
 
 
 
-
-if(
-!searchInput.contains(event.target)
-&&
-!suggestionsBox.contains(event.target)
-
-){
+    const insideInput =
+    searchInput.contains(event.target);
 
 
-suggestionsBox.innerHTML="";
+
+    const insideSuggestions =
+    suggestionsBox.contains(event.target);
 
 
-}
+
+
+
+    if(!insideInput && !insideSuggestions){
+
+
+        suggestionsBox.innerHTML="";
+
+
+    }
 
 
 
 });
+
+
 
 
 
@@ -417,33 +414,31 @@ if(searchInput){
 
 searchInput.addEventListener(
 "keypress",
-function(event){
+(event)=>{
+
+
+    if(event.key === "Enter"){
 
 
 
-if(event.key === "Enter"){
-
-
-
-let value =
-searchInput.value.trim();
-
+        let value =
+        searchInput.value.trim();
 
 
 
 
-if(value){
+        if(value){
 
 
-window.location.href =
-`/search/?q=${value}`;
+            window.location.href =
+            `/search/?q=${value}`;
 
 
-}
+        }
 
 
 
-}
+    }
 
 
 
@@ -451,6 +446,9 @@ window.location.href =
 
 
 }
+
+
+
 
 
 
@@ -475,32 +473,27 @@ document.querySelector(".shop-navbar");
 if(navbar){
 
 
-
 window.addEventListener(
 "scroll",
 ()=>{
 
 
-
-if(window.scrollY > 30){
-
+    if(window.scrollY > 30){
 
 
-navbar.style.boxShadow =
-"0 8px 25px rgba(0,0,0,.15)";
+        navbar.style.boxShadow =
+        "0 8px 25px rgba(0,0,0,.15)";
 
 
-
-}
-else{
-
-
-navbar.style.boxShadow =
-"0 5px 20px rgba(0,0,0,.08)";
+    }
+    else{
 
 
-}
+        navbar.style.boxShadow =
+        "0 5px 20px rgba(0,0,0,.08)";
 
+
+    }
 
 
 });

@@ -6,9 +6,7 @@
 
 <nav class="shop-navbar">
 
-
 <div class="nav-container">
-
 
 
 <!-- LOGO -->
@@ -23,7 +21,7 @@ Trendy<span>Shop</span>
 
 
 
-<!-- SEARCH ALWAYS VISIBLE -->
+<!-- SEARCH -->
 
 <div class="search-wrapper">
 
@@ -34,7 +32,6 @@ id="searchInput"
 placeholder="Search products..."
 autocomplete="off"
 >
-
 
 
 <button class="search-btn">
@@ -59,15 +56,12 @@ class="suggestions-box">
 
 
 
-
 <!-- MOBILE TOGGLE -->
 
 <button class="mobile-toggle"
 id="mobileToggle">
 
-
 <i class="fa-solid fa-bars"></i>
-
 
 </button>
 
@@ -77,25 +71,18 @@ id="mobileToggle">
 
 
 
-
-<!-- NAVIGATION MENU -->
-
+<!-- MENU -->
 
 <div class="nav-menu"
 id="navMenu">
 
 
-
 <button class="mobile-close"
 id="mobileClose">
 
-
 <i class="fa-solid fa-xmark"></i>
 
-
 </button>
-
-
 
 
 
@@ -104,100 +91,77 @@ id="mobileClose">
 <a href="{% url 'home' %}"
 class="nav-item">
 
-
 <i class="fa-solid fa-house"></i>
 
-<span>
-Home
-</span>
-
+<span>Home</span>
 
 </a>
+
+
+
 
 <a href="{% url 'catagory' %}"
 class="nav-item">
 
-
 <i class="fa-solid fa-layer-group"></i>
 
-<span>
-Categories
-</span>
-
+<span>Categories</span>
 
 </a>
+
+
+
 
 <a href="{% url 'about' %}"
 class="nav-item">
 
+<i class="fa-solid fa-circle-info"></i>
 
-<i class="fa-solid fa-layer-group"></i>
-
-<span>
-About us
-</span>
-
+<span>About</span>
 
 </a>
+
+
+
 
 <a href="{% url 'service' %}"
 class="nav-item">
 
+<i class="fa-solid fa-headset"></i>
 
-<i class="fa-solid fa-layer-group"></i>
-
-<span>
-Services
-</span>
-
+<span>Services</span>
 
 </a>
 
 
+
+
+
 {% if request.user.is_authenticated %}
-
-
-
-
-
-
-<!-- USER PROFILE -->
 
 
 <a href="{% url 'update' request.user.id %}"
 class="profile-link">
 
 
-
 {% if request.user.profile_image %}
-
 
 <img src="{{request.user.profile_image.url}}">
 
-
 {% else %}
 
-
 <img src="{% static 'images/default_profile.jpg' %}">
-
 
 {% endif %}
 
 
 
-
 <span>
-
 {{request.user.username}}
-
 </span>
 
 
-
 </a>
-
-
-
 
 
 
@@ -206,19 +170,11 @@ class="profile-link">
 <a href="{% url 'favorites' %}"
 class="nav-item">
 
-
 <i class="fa-solid fa-heart"></i>
 
-<span>
-Wishlist
-</span>
-
+<span>Wishlist</span>
 
 </a>
-
-
-
-
 
 
 
@@ -226,19 +182,11 @@ Wishlist
 <a href="{% url 'cart' %}"
 class="nav-item">
 
-
 <i class="fa-solid fa-cart-shopping"></i>
 
-<span>
-Cart
-</span>
-
+<span>Cart</span>
 
 </a>
-
-
-
-
 
 
 
@@ -246,19 +194,11 @@ Cart
 <a href="{% url 'order_list' %}"
 class="nav-item">
 
-
 <i class="fa-solid fa-box"></i>
 
-<span>
-Orders
-</span>
-
+<span>Orders</span>
 
 </a>
-
-
-
-
 
 
 
@@ -266,15 +206,9 @@ Orders
 <a href="{% url 'logout' %}"
 class="login-btn">
 
-
 Logout
 
-
 </a>
-
-
-
-
 
 
 
@@ -283,20 +217,12 @@ Logout
 
 
 
-
-
-
 <a href="{% url 'login' %}"
 class="login-btn">
 
-
 Login
 
-
 </a>
-
-
-
 
 
 
@@ -304,13 +230,9 @@ Login
 <a href="{% url 'register' %}"
 class="nav-item">
 
-
 Register
 
-
 </a>
-
-
 
 
 
@@ -321,18 +243,12 @@ Register
 
 
 
-
-
 </div>
 
 
-
-
 </div>
-
 
 </nav>
-
 
 
 
@@ -343,7 +259,6 @@ const productDetailUrl =
 "{% url 'product_detail' 0 %}";
 
 </script>
-
 
 
 <script src="{% static 'js/navbar.js' %}"></script>
