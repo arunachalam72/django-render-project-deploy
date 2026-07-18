@@ -1,6 +1,6 @@
 
 // =================================
-// MOBILE NAVBAR
+// MOBILE NAVBAR OPEN / CLOSE
 // =================================
 
 
@@ -19,18 +19,16 @@ document.getElementById("navMenu");
 
 
 
-// OPEN MENU
-
 if(mobileToggle && navMenu){
 
 
-mobileToggle.addEventListener("click",()=>{
+    mobileToggle.addEventListener("click",()=>{
 
 
-    navMenu.classList.add("active");
+        navMenu.classList.add("active");
 
 
-});
+    });
 
 
 }
@@ -39,18 +37,17 @@ mobileToggle.addEventListener("click",()=>{
 
 
 
-// CLOSE MENU
 
 if(mobileClose && navMenu){
 
 
-mobileClose.addEventListener("click",()=>{
+    mobileClose.addEventListener("click",()=>{
 
 
-    navMenu.classList.remove("active");
+        navMenu.classList.remove("active");
 
 
-});
+    });
 
 
 }
@@ -60,16 +57,21 @@ mobileClose.addEventListener("click",()=>{
 
 
 
-// CLOSE AFTER CLICK
+
+
+// =================================
+// CLOSE MENU AFTER CLICK
+// =================================
+
 
 document
 .querySelectorAll(
 ".nav-item,.login-btn,.profile-link"
 )
-.forEach(item=>{
+.forEach(link=>{
 
 
-item.addEventListener("click",()=>{
+link.addEventListener("click",()=>{
 
 
     if(window.innerWidth <= 991 && navMenu){
@@ -91,7 +93,11 @@ item.addEventListener("click",()=>{
 
 
 
-// CLOSE OUTSIDE CLICK
+
+
+// =================================
+// CLOSE MENU OUTSIDE CLICK
+// =================================
 
 
 document.addEventListener("click",(event)=>{
@@ -107,13 +113,13 @@ navMenu.contains(event.target);
 
 
 
-const insideButton =
+const insideToggle =
 mobileToggle.contains(event.target);
 
 
 
 
-if(!insideMenu && !insideButton){
+if(!insideMenu && !insideToggle){
 
 
     navMenu.classList.remove("active");
@@ -134,6 +140,7 @@ if(!insideMenu && !insideButton){
 
 // =================================
 // PRODUCT SEARCH
+// RUNS ONLY ON HOME PAGE
 // =================================
 
 
@@ -183,10 +190,13 @@ if(query.length < 2){
 fetch(`/search-suggestions/?q=${query}`)
 
 
+
 .then(response=>response.json())
 
 
+
 .then(data=>{
+
 
 
 suggestionsBox.innerHTML="";
@@ -195,21 +205,26 @@ suggestionsBox.innerHTML="";
 
 
 
-if(data.length===0){
+if(data.length === 0){
 
 
-suggestionsBox.innerHTML=
+suggestionsBox.innerHTML = `
 
-`
 <div class="p-3 text-center">
+
 No products found
+
 </div>
+
 `;
+
 
 return;
 
 
 }
+
+
 
 
 
@@ -245,14 +260,12 @@ new RegExp(
 
 
 
+suggestionsBox.innerHTML += `
 
-
-suggestionsBox.innerHTML +=
-
-`
 
 <a href="${url}"
 class="suggestion-item">
+
 
 
 <img src="${product.image}"
@@ -265,11 +278,14 @@ margin-right:12px;
 ">
 
 
+
 <div>
 
 
 <div>
+
 ${highlighted}
+
 </div>
 
 
@@ -284,6 +300,7 @@ font-weight:600;
 </small>
 
 
+
 </div>
 
 
@@ -291,8 +308,8 @@ font-weight:600;
 </a>
 
 
-`;
 
+`;
 
 
 
@@ -308,7 +325,7 @@ font-weight:600;
 
 
 console.log(
-"Search error:",
+"Search Error:",
 error
 );
 
@@ -331,7 +348,9 @@ error
 
 
 
+// =================================
 // CLOSE SEARCH DROPDOWN
+// =================================
 
 
 document.addEventListener(
@@ -340,10 +359,7 @@ function(e){
 
 
 
-if(
-!searchInput ||
-!suggestionsBox
-)
+if(!searchInput || !suggestionsBox)
 
 return;
 
@@ -374,7 +390,10 @@ suggestionsBox.innerHTML="";
 
 
 
+
+// =================================
 // ENTER SEARCH
+// =================================
 
 
 if(searchInput){
@@ -387,12 +406,13 @@ function(e){
 
 
 
-if(e.key==="Enter"){
+if(e.key === "Enter"){
 
 
 
 let value =
 searchInput.value.trim();
+
 
 
 
@@ -442,13 +462,12 @@ window.addEventListener(
 ()=>{
 
 
-if(window.scrollY > 30){
 
+if(window.scrollY > 30){
 
 
 navbar.style.boxShadow =
 "0 8px 25px rgba(0,0,0,.15)";
-
 
 
 }
@@ -464,7 +483,6 @@ navbar.style.boxShadow =
 
 
 });
-
 
 
 }

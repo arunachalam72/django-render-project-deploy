@@ -8,6 +8,8 @@
 }
 
 
+/* Fixed navbar space */
+
 body{
 
     padding-top:70px;
@@ -33,7 +35,7 @@ body{
 
     height:70px;
 
-    background:white;
+    background:#fff;
 
     z-index:9999;
 
@@ -43,8 +45,8 @@ body{
 
 
 
-.nav-container{
 
+.nav-container{
 
     max-width:1400px;
 
@@ -60,7 +62,6 @@ body{
 
     gap:20px;
 
-
 }
 
 
@@ -74,7 +75,6 @@ body{
 
 .brand-logo{
 
-
     font-size:28px;
 
     font-weight:800;
@@ -85,8 +85,8 @@ body{
 
     white-space:nowrap;
 
-
 }
+
 
 
 .brand-logo span{
@@ -106,7 +106,6 @@ body{
 
 .search-wrapper{
 
-
     flex:1;
 
     max-width:600px;
@@ -118,7 +117,6 @@ body{
 
 
 .search-wrapper input{
-
 
     width:100%;
 
@@ -134,18 +132,15 @@ body{
 
     outline:none;
 
-
 }
 
 
 
 .search-wrapper input:focus{
 
-
-    background:white;
+    background:#fff;
 
     border-color:#2874f0;
-
 
 }
 
@@ -155,25 +150,23 @@ body{
 
 .search-btn{
 
-
     position:absolute;
 
     right:5px;
 
-    top:3.5px;
+    top:3px;
 
     width:38px;
 
     height:38px;
 
-    border-radius:50%;
-
     border:none;
+
+    border-radius:50%;
 
     background:#2874f0;
 
     color:white;
-
 
 }
 
@@ -181,17 +174,18 @@ body{
 
 
 
+
+
 /* ================================
-   SEARCH RESULT
+   SEARCH SUGGESTION
 ================================ */
 
 
 .suggestions-box{
 
-
     position:absolute;
 
-    top:50px;
+    top:52px;
 
     left:0;
 
@@ -201,16 +195,16 @@ body{
 
     border-radius:12px;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-
     overflow:hidden;
 
     max-height:350px;
 
     overflow-y:auto;
 
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
 
 }
+
 
 
 
@@ -225,20 +219,19 @@ body{
 
 .nav-menu{
 
-
     display:flex;
 
     align-items:center;
 
     gap:10px;
 
-
 }
 
 
 
-.nav-item{
 
+
+.nav-item{
 
     display:flex;
 
@@ -252,12 +245,11 @@ body{
 
     color:#333;
 
-    text-decoration:none;
-
     font-weight:600;
 
-    font-size:14px;
+    text-decoration:none;
 
+    font-size:14px;
 
 }
 
@@ -273,11 +265,9 @@ body{
 
 .nav-item:hover{
 
-
     background:#2874f0;
 
     color:white;
-
 
 }
 
@@ -293,13 +283,14 @@ body{
 
 
 
+
+
 /* ================================
    PROFILE
 ================================ */
 
 
 .profile-link{
-
 
     display:flex;
 
@@ -319,7 +310,6 @@ body{
 
 .profile-link img{
 
-
     width:38px;
 
     height:38px;
@@ -329,7 +319,6 @@ body{
     object-fit:cover;
 
     border:2px solid #2874f0;
-
 
 }
 
@@ -345,23 +334,19 @@ body{
 
 .login-btn{
 
-
     background:#2874f0;
 
     color:white;
+
+    text-decoration:none;
 
     padding:10px 25px;
 
     border-radius:25px;
 
-    text-decoration:none;
-
     font-weight:600;
 
-
 }
-
-
 
 
 
@@ -377,6 +362,7 @@ body{
 
 
 
+
 /* ================================
    MOBILE BUTTON
 ================================ */
@@ -384,7 +370,6 @@ body{
 
 .mobile-toggle,
 .mobile-close{
-
 
     display:none;
 
@@ -396,10 +381,7 @@ body{
 
     font-size:25px;
 
-
 }
-
-
 
 
 
@@ -423,7 +405,7 @@ body{
 
 .brand-logo{
 
-    font-size:23px;
+    font-size:24px;
 
 }
 
@@ -436,14 +418,17 @@ body{
 }
 
 
-
 }
 
 
 
 
+
+
+
+
 /* ================================
-   MOBILE MENU
+   MOBILE
 ================================ */
 
 
@@ -461,18 +446,17 @@ body{
 
 .nav-container{
 
-
     height:65px;
 
-    justify-content:space-between;
+    padding:0 15px;
 
+    justify-content:space-between;
 
 }
 
 
 
 .mobile-toggle{
-
 
     display:block;
 
@@ -490,19 +474,17 @@ body{
 
 
 
+
+
 .search-wrapper{
 
-
     order:2;
-
-    max-width:none;
 
 }
 
 
 
 .nav-menu{
-
 
     position:fixed;
 
@@ -518,6 +500,8 @@ body{
 
     background:white;
 
+    display:flex;
+
     flex-direction:column;
 
     align-items:flex-start;
@@ -526,10 +510,9 @@ body{
 
     gap:15px;
 
-    transition:.35s;
+    transition:.3s;
 
     box-shadow:-10px 0 30px rgba(0,0,0,.2);
-
 
 }
 
@@ -545,7 +528,6 @@ body{
 
 .mobile-close{
 
-
     display:block;
 
     position:absolute;
@@ -553,7 +535,6 @@ body{
     right:20px;
 
     top:20px;
-
 
 }
 
@@ -563,21 +544,7 @@ body{
 .profile-link,
 .login-btn{
 
-
     width:100%;
-
-
-}
-
-
-
-.profile-link img{
-
-
-    width:45px;
-
-    height:45px;
-
 
 }
 
@@ -597,7 +564,6 @@ body{
 
 
 
-
 /* ================================
    SMALL MOBILE
 ================================ */
@@ -609,31 +575,27 @@ body{
 
 body{
 
-    padding-top:120px;
+    padding-top:115px;
 
 }
-
 
 
 
 .shop-navbar{
 
-    height:115px;
+    height:110px;
 
 }
 
 
 
-
 .nav-container{
 
-
-    height:115px;
+    height:110px;
 
     flex-wrap:wrap;
 
     padding:10px 15px;
-
 
 }
 
@@ -647,24 +609,13 @@ body{
 
 
 
-
-.mobile-toggle{
-
-    order:2;
-
-}
-
-
+/* Only home page search */
 
 .search-wrapper{
 
-
-    order:3;
-
-    flex-basis:100%;
-
     width:100%;
 
+    flex-basis:100%;
 
 }
 
@@ -672,36 +623,10 @@ body{
 
 .search-wrapper input{
 
-
     height:42px;
 
-
 }
 
-
-
-}
-
-
-
-
-
-@media(max-width:380px){
-
-
-.brand-logo{
-
-    font-size:20px;
-
-}
-
-
-
-.nav-menu{
-
-    width:90%;
-
-}
 
 
 }

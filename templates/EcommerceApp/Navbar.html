@@ -10,7 +10,6 @@
 <div class="nav-container">
 
 
-
 <!-- LOGO -->
 
 <a href="{% url 'home' %}" class="brand-logo">
@@ -22,34 +21,21 @@ Trendy<span>Shop</span>
 
 
 
-<!-- MOBILE MENU BUTTON -->
 
-<button class="mobile-toggle" id="mobileToggle">
+<!-- SEARCH ONLY ON HOME PAGE -->
 
-<i class="fa-solid fa-bars"></i>
+{% if request.resolver_match.url_name == 'home' %}
 
-</button>
-
-
-
-
-
-<!-- SEARCH -->
 
 <div class="search-wrapper">
 
 
-<input
-
+<input 
 type="search"
-
 id="searchInput"
-
 placeholder="Search products..."
-
 autocomplete="off"
-
-/>
+>
 
 
 
@@ -72,18 +58,39 @@ class="suggestions-box">
 </div>
 
 
+{% endif %}
 
 
 
 
-<!-- NAVIGATION MENU -->
-
-
-<div class="nav-menu" id="navMenu">
 
 
 
-<button class="mobile-close" id="mobileClose">
+<!-- MOBILE MENU BUTTON -->
+
+<button class="mobile-toggle"
+id="mobileToggle">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+
+
+
+
+
+
+
+<!-- NAV MENU -->
+
+
+<div class="nav-menu"
+id="navMenu">
+
+
+<button class="mobile-close"
+id="mobileClose">
 
 <i class="fa-solid fa-xmark"></i>
 
@@ -93,11 +100,16 @@ class="suggestions-box">
 
 
 
-<a href="{% url 'home' %}" class="nav-item">
+<a href="{% url 'home' %}"
+class="nav-item">
+
 
 <i class="fa-solid fa-house"></i>
 
-<span>Home</span>
+<span>
+Home
+</span>
+
 
 </a>
 
@@ -105,13 +117,20 @@ class="suggestions-box">
 
 
 
-<a href="{% url 'catagory' %}" class="nav-item">
+<a href="{% url 'catagory' %}"
+class="nav-item">
+
 
 <i class="fa-solid fa-layer-group"></i>
 
-<span>Categories</span>
+<span>
+Categories
+</span>
+
 
 </a>
+
+
 
 
 
@@ -122,8 +141,8 @@ class="suggestions-box">
 
 
 
+<!-- PROFILE ONLY WHEN LOGIN -->
 
-<!-- PROFILE ONLY FOR LOGGED USER -->
 
 <a href="{% url 'update' request.user.id %}"
 class="profile-link">
@@ -133,7 +152,7 @@ class="profile-link">
 {% if request.user.profile_image %}
 
 
-<img src="{{ request.user.profile_image.url }}">
+<img src="{{request.user.profile_image.url}}">
 
 
 {% else %}
@@ -147,12 +166,16 @@ class="profile-link">
 
 
 <span>
-{{ request.user.username }}
+
+{{request.user.username}}
+
 </span>
 
 
 
 </a>
+
+
 
 
 
@@ -195,7 +218,6 @@ Cart
 
 
 
-
 <a href="{% url 'order_list' %}"
 class="nav-item">
 
@@ -214,15 +236,13 @@ Orders
 
 
 
+
 <a href="{% url 'logout' %}"
 class="login-btn">
 
-
 Logout
 
-
 </a>
-
 
 
 
@@ -235,15 +255,13 @@ Logout
 
 
 
-
 <a href="{% url 'login' %}"
 class="login-btn">
 
-
 Login
 
-
 </a>
+
 
 
 
@@ -252,9 +270,7 @@ Login
 <a href="{% url 'register' %}"
 class="nav-item">
 
-
 Register
-
 
 </a>
 
@@ -268,9 +284,8 @@ Register
 
 
 
+
 </div>
-
-
 
 
 
@@ -284,17 +299,17 @@ Register
 
 
 
+{% if request.resolver_match.url_name == 'home' %}
 
 <script>
 
-
 const productDetailUrl =
-
 "{% url 'product_detail' 0 %}";
-
 
 </script>
 
 
-
 <script src="{% static 'js/navbar.js' %}"></script>
+
+
+{% endif %}
