@@ -1,83 +1,82 @@
-// =================================
-// MOBILE NAVBAR OPEN / CLOSE
-// =================================
-
-const mobileToggle = document.getElementById("mobileToggle");
-const mobileClose = document.getElementById("mobileClose");
-const navMenu = document.getElementById("navMenu");
-
-
-if (mobileToggle && navMenu) {
-
-    mobileToggle.addEventListener("click", () => {
-
-        navMenu.classList.add("active");
-
-    });
-
-}
-
-
-if (mobileClose && navMenu) {
-
-    mobileClose.addEventListener("click", () => {
-
-        navMenu.classList.remove("active");
-
-    });
-
-}
-
-
 
 // =================================
-// CLOSE MENU WHEN CLICKING LINK
+// MOBILE NAVBAR
 // =================================
 
-document.querySelectorAll(".nav-item, .login-btn, .profile-link")
-.forEach(link => {
+
+const mobileToggle =
+document.getElementById("mobileToggle");
 
 
-    link.addEventListener("click", () => {
+const mobileClose =
+document.getElementById("mobileClose");
 
 
-        if(window.innerWidth <= 991 && navMenu){
-
-            navMenu.classList.remove("active");
-
-        }
+const navMenu =
+document.getElementById("navMenu");
 
 
-    });
+
+
+
+// OPEN MENU
+
+if(mobileToggle && navMenu){
+
+
+mobileToggle.addEventListener("click",()=>{
+
+
+    navMenu.classList.add("active");
 
 
 });
 
 
-
-// =================================
-// CLOSE MENU WHEN CLICK OUTSIDE
-// =================================
-
-
-document.addEventListener("click", function(event){
-
-
-    if(!navMenu || !mobileToggle) return;
-
-
-    const clickedInsideMenu =
-    navMenu.contains(event.target);
-
-
-    const clickedToggle =
-    mobileToggle.contains(event.target);
+}
 
 
 
-    if(!clickedInsideMenu && !clickedToggle){
+
+
+// CLOSE MENU
+
+if(mobileClose && navMenu){
+
+
+mobileClose.addEventListener("click",()=>{
+
+
+    navMenu.classList.remove("active");
+
+
+});
+
+
+}
+
+
+
+
+
+
+// CLOSE AFTER CLICK
+
+document
+.querySelectorAll(
+".nav-item,.login-btn,.profile-link"
+)
+.forEach(item=>{
+
+
+item.addEventListener("click",()=>{
+
+
+    if(window.innerWidth <= 991 && navMenu){
+
 
         navMenu.classList.remove("active");
+
 
     }
 
@@ -85,10 +84,56 @@ document.addEventListener("click", function(event){
 });
 
 
+});
+
+
+
+
+
+
+// CLOSE OUTSIDE CLICK
+
+
+document.addEventListener("click",(event)=>{
+
+
+if(!navMenu || !mobileToggle)
+return;
+
+
+
+const insideMenu =
+navMenu.contains(event.target);
+
+
+
+const insideButton =
+mobileToggle.contains(event.target);
+
+
+
+
+if(!insideMenu && !insideButton){
+
+
+    navMenu.classList.remove("active");
+
+
+}
+
+
+
+});
+
+
+
+
+
+
 
 
 // =================================
-// PRODUCT SEARCH SUGGESTIONS
+// PRODUCT SEARCH
 // =================================
 
 
@@ -101,135 +146,31 @@ document.getElementById("suggestionsBox");
 
 
 
-if(searchInput){
 
 
-searchInput.addEventListener("keyup", function(){
 
+if(searchInput && suggestionsBox){
 
-    let query=this.value.trim();
 
 
+searchInput.addEventListener(
+"keyup",
+function(){
 
-    if(query.length < 2){
 
-        suggestionsBox.innerHTML="";
 
-        return;
+let query =
+this.value.trim();
 
-    }
 
 
 
-    fetch(`/search-suggestions/?q=${query}`)
+if(query.length < 2){
 
-    .then(response=>response.json())
 
+    suggestionsBox.innerHTML="";
 
-    .then(data=>{
-
-
-        suggestionsBox.innerHTML="";
-
-
-
-        if(data.length===0){
-
-
-            suggestionsBox.innerHTML=
-
-            `<div class="p-3 text-center">
-                No products found
-             </div>`;
-
-            return;
-
-        }
-
-
-
-        data.forEach(product=>{
-
-
-            let url =
-            productDetailUrl.replace(
-                "0",
-                product.id
-            );
-
-
-
-            let highlighted =
-            product.name.replace(
-
-                new RegExp(
-                    `(${query})`,
-                    "gi"
-                ),
-
-                "<strong>$1</strong>"
-
-            );
-
-
-
-            suggestionsBox.innerHTML += `
-
-            <a href="${url}"
-            class="suggestion-item">
-
-
-                <img src="${product.image}"
-                width="45"
-                height="45"
-                style="
-                object-fit:cover;
-                border-radius:8px;
-                margin-right:12px;
-                ">
-
-
-                <div>
-
-                    <div>
-                    ${highlighted}
-                    </div>
-
-
-                    <small
-                    style="color:#2874f0;font-weight:600">
-
-                    ₹${product.price}
-
-                    </small>
-
-
-                </div>
-
-
-            </a>
-
-            `;
-
-
-        });
-
-
-    })
-
-
-    .catch(error=>{
-
-        console.log(
-            "Search error:",
-            error
-        );
-
-    });
-
-
-
-});
+    return;
 
 
 }
@@ -237,16 +178,176 @@ searchInput.addEventListener("keyup", function(){
 
 
 
-// =================================
-// CLOSE SEARCH DROPDOWN
-// =================================
 
 
-document.addEventListener("click",function(e){
+fetch(`/search-suggestions/?q=${query}`)
 
 
-if(!searchInput || !suggestionsBox)
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+suggestionsBox.innerHTML="";
+
+
+
+
+
+if(data.length===0){
+
+
+suggestionsBox.innerHTML=
+
+`
+<div class="p-3 text-center">
+No products found
+</div>
+`;
+
 return;
+
+
+}
+
+
+
+
+
+data.forEach(product=>{
+
+
+
+let url =
+productDetailUrl.replace(
+"0",
+product.id
+);
+
+
+
+
+
+let highlighted =
+product.name.replace(
+
+new RegExp(
+`(${query})`,
+"gi"
+),
+
+"<strong>$1</strong>"
+
+);
+
+
+
+
+
+
+
+suggestionsBox.innerHTML +=
+
+`
+
+<a href="${url}"
+class="suggestion-item">
+
+
+<img src="${product.image}"
+width="45"
+height="45"
+style="
+object-fit:cover;
+border-radius:8px;
+margin-right:12px;
+">
+
+
+<div>
+
+
+<div>
+${highlighted}
+</div>
+
+
+
+<small style="
+color:#2874f0;
+font-weight:600;
+">
+
+₹${product.price}
+
+</small>
+
+
+</div>
+
+
+
+</a>
+
+
+`;
+
+
+
+
+});
+
+
+
+})
+
+
+
+.catch(error=>{
+
+
+console.log(
+"Search error:",
+error
+);
+
+
+});
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// CLOSE SEARCH DROPDOWN
+
+
+document.addEventListener(
+"click",
+function(e){
+
+
+
+if(
+!searchInput ||
+!suggestionsBox
+)
+
+return;
+
+
 
 
 
@@ -257,9 +358,12 @@ if(
 
 ){
 
-    suggestionsBox.innerHTML="";
+
+suggestionsBox.innerHTML="";
+
 
 }
+
 
 
 });
@@ -267,12 +371,14 @@ if(
 
 
 
-// =================================
-// SEARCH ENTER KEY
-// =================================
+
+
+
+// ENTER SEARCH
 
 
 if(searchInput){
+
 
 
 searchInput.addEventListener(
@@ -280,25 +386,29 @@ searchInput.addEventListener(
 function(e){
 
 
-    if(e.key==="Enter"){
 
-
-        let value =
-        searchInput.value.trim();
+if(e.key==="Enter"){
 
 
 
-        if(value.length>0){
+let value =
+searchInput.value.trim();
 
 
-            window.location.href =
-            `/search/?q=${value}`;
+
+if(value){
 
 
-        }
+window.location.href =
+`/search/?q=${value}`;
 
 
-    }
+}
+
+
+
+}
+
 
 
 });
@@ -308,8 +418,13 @@ function(e){
 
 
 
+
+
+
+
+
 // =================================
-// NAVBAR SHADOW ON SCROLL
+// NAVBAR SHADOW
 // =================================
 
 
@@ -318,31 +433,38 @@ document.querySelector(".shop-navbar");
 
 
 
-window.addEventListener("scroll",()=>{
+if(navbar){
 
 
-if(!navbar)
-return;
 
+window.addEventListener(
+"scroll",
+()=>{
 
 
 if(window.scrollY > 30){
 
 
-    navbar.style.boxShadow =
-    "0 8px 25px rgba(0,0,0,.15)";
+
+navbar.style.boxShadow =
+"0 8px 25px rgba(0,0,0,.15)";
+
 
 
 }
-
 else{
 
 
-    navbar.style.boxShadow =
-    "0 5px 20px rgba(0,0,0,.08)";
+navbar.style.boxShadow =
+"0 5px 20px rgba(0,0,0,.08)";
 
 
 }
 
 
+
 });
+
+
+
+}

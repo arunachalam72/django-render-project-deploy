@@ -1,8 +1,10 @@
+
 /* ==============================
    GOOGLE FONT
 ============================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 
 *{
     margin:0;
@@ -11,105 +13,139 @@
     font-family:'Poppins',sans-serif;
 }
 
+
 body{
+
     background:#f1f3f6;
     overflow-x:hidden;
+
 }
 
-/* ==============================
-   LINKS
-============================== */
 
 a{
+
     text-decoration:none;
     color:inherit;
+
 }
+
+
 
 /* ==============================
    CONTAINER
 ============================== */
 
+
 .container{
+
     max-width:1400px;
+
 }
 
+
+
+
 /* ==============================
-   HERO SLIDER
+   HERO
 ============================== */
 
+
 #heroCarousel{
+
     border-radius:15px;
     overflow:hidden;
     background:white;
+
 }
 
+
 .hero-img{
+
     width:100%;
     height:420px;
     object-fit:cover;
+
 }
+
+
 
 .carousel-control-next,
 .carousel-control-prev{
+
     width:5%;
+
 }
 
+
+
 .carousel-indicators button{
+
     width:12px;
     height:12px;
     border-radius:50%;
+
 }
 
+
+
+
+
 /* ==============================
-   CATEGORY BOX
+   CATEGORY
 ============================== */
 
+
 .category-box{
+
     background:white;
     border-radius:12px;
     padding:20px;
+
 }
 
-/* ==============================
-   CATEGORY CARD
-============================== */
+
 
 .category-card{
+
     text-align:center;
-    transition:.35s;
     cursor:pointer;
+    transition:.35s;
+
 }
+
+
 
 .category-card img{
 
     width:90px;
-
     height:90px;
-
     object-fit:cover;
-
     border-radius:50%;
-
     border:4px solid #f2f2f2;
-
     transition:.4s;
+
 }
+
+
 
 .category-card h6{
 
     margin-top:12px;
-
     font-size:15px;
-
     font-weight:600;
-
     color:#333;
+
 }
+
+
 
 .category-card:hover{
 
     transform:translateY(-8px);
+
 }
+
+
 
 .category-card:hover img{
 
@@ -118,52 +154,55 @@ a{
     border-color:#2874f0;
 
     box-shadow:0 12px 30px rgba(0,0,0,.15);
+
 }
+
+
 
 /* ==============================
    SWIPER
 ============================== */
 
+
 .swiper{
+
     padding-bottom:25px;
+
 }
 
-.swiper-pagination-bullet{
 
-    background:#2874f0;
-}
 
-.swiper-pagination-bullet-active{
-
-    width:24px;
-
-    border-radius:10px;
-}
 
 /* ==============================
-   OFFER BANNER
+   OFFER
 ============================== */
+
 
 .offer-banner{
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 
     padding:40px;
 
     border-radius:20px;
 
-    background:linear-gradient(135deg,#2874f0,#00c6ff);
+    background:linear-gradient(
+        135deg,
+        #2874f0,
+        #00c6ff
+    );
 
     color:white;
 
     overflow:hidden;
 
     position:relative;
+
 }
+
+
 
 .offer-banner::before{
 
@@ -172,7 +211,6 @@ a{
     position:absolute;
 
     width:350px;
-
     height:350px;
 
     border-radius:50%;
@@ -180,25 +218,28 @@ a{
     background:rgba(255,255,255,.08);
 
     top:-150px;
-
     right:-120px;
+
 }
+
+
 
 .offer-banner h2{
 
     font-size:40px;
-
     font-weight:700;
 
-    margin-bottom:10px;
 }
+
+
 
 .offer-banner p{
 
     font-size:18px;
 
-    opacity:.95;
 }
+
+
 
 .offer-banner .btn{
 
@@ -213,29 +254,33 @@ a{
     border-radius:50px;
 
     transition:.3s;
+
 }
+
+
+
 
 .offer-banner .btn:hover{
 
     transform:scale(1.05);
 
-    box-shadow:0 12px 30px rgba(0,0,0,.25);
 }
+
+
+
 
 /* ==============================
    SECTION TITLE
 ============================== */
 
+
 .section-title{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
     margin-bottom:25px;
+
 }
+
+
 
 .section-title h3{
 
@@ -244,54 +289,188 @@ a{
     font-weight:700;
 
     color:#222;
+
 }
 
-.section-title a{
 
-    color:#2874f0;
 
-    font-weight:600;
-}
+
 
 /* ==============================
-   CARD GRID
+   PRODUCT CARD
 ============================== */
 
-.row{
 
-    --bs-gutter-x:1.3rem;
-}
-
-/* ==============================
-   SHADOWS
-============================== */
-
-.shadow{
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08)!important;
-}
-
-.shadow-lg{
-
-    box-shadow:0 15px 35px rgba(0,0,0,.12)!important;
-}
-
-/* ==============================
-   WHITE BOXES
-============================== */
-
-.white-box{
+.product-card{
 
     background:white;
 
-    border-radius:18px;
+    border-radius:15px;
 
-    padding:20px;
+    padding:15px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.3s;
+
 }
 
+
+
+.product-card:hover{
+
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+
+}
+
+
+
+.product-img{
+
+    width:100%;
+
+    height:250px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+}
+
+
+
+.product-card img:hover{
+
+    transform:scale(1.08);
+
+}
+
+
+
+.product-info{
+
+    padding-top:15px;
+
+}
+
+
+
+.product-info h5{
+
+    font-size:17px;
+
+    font-weight:600;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+}
+
+
+
+.price-box{
+
+    margin-top:10px;
+
+}
+
+
+
+.price{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#2874f0;
+
+}
+
+
+
+.old-price{
+
+    margin-left:8px;
+
+    color:#999;
+
+    text-decoration:line-through;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+.favorite-icon{
+
+    position:absolute;
+
+    right:15px;
+
+    top:15px;
+
+    font-size:22px;
+
+    color:#777;
+
+    z-index:2;
+
+    cursor:pointer;
+
+}
+
+
+
+.favorite-icon.active{
+
+    color:red;
+
+}
+
+
+
+
+
+.discount-badge{
+
+    position:absolute;
+
+    left:15px;
+
+    top:15px;
+
+    background:#ff3f6c;
+
+    color:white;
+
+    padding:5px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    z-index:2;
+
+}
+
+
+
+
+
 /* ==============================
-   BUTTONS
+   BUTTON
 ============================== */
+
 
 .btn-primary{
 
@@ -303,38 +482,319 @@ a{
 
     font-weight:600;
 
-    transition:.3s;
 }
+
+
 
 .btn-primary:hover{
 
     background:#1d63d6;
 
-    transform:translateY(-2px);
 }
+
+
+
 
 /* ==============================
    ANIMATION
 ============================== */
 
+
 .fade-up{
 
     animation:fadeUp .7s ease;
+
 }
+
+
 
 @keyframes fadeUp{
 
-    from{
+from{
 
-        opacity:0;
+    opacity:0;
 
-        transform:translateY(30px);
-    }
+    transform:translateY(30px);
 
-    to{
+}
 
-        opacity:1;
+to{
 
-        transform:translateY(0);
-    }
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+}
+
+
+
+
+
+/* ==============================
+   TABLET
+============================== */
+
+
+@media(max-width:992px){
+
+
+.hero-img{
+
+    height:320px;
+
+}
+
+
+
+.offer-banner h2{
+
+    font-size:32px;
+
+}
+
+
+
+.section-title h3{
+
+    font-size:26px;
+
+}
+
+
+
+.product-img{
+
+    height:220px;
+
+}
+
+
+
+}
+
+
+
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+
+@media(max-width:768px){
+
+
+
+.container{
+
+    padding-left:12px;
+
+    padding-right:12px;
+
+}
+
+
+
+.hero-img{
+
+    height:220px;
+
+}
+
+
+
+#heroCarousel{
+
+    border-radius:10px;
+
+}
+
+
+
+.category-box{
+
+    padding:12px;
+
+}
+
+
+
+.category-card img{
+
+    width:70px;
+
+    height:70px;
+
+}
+
+
+
+.category-card h6{
+
+    font-size:13px;
+
+}
+
+
+
+.offer-banner{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    gap:20px;
+
+    padding:25px 15px;
+
+}
+
+
+
+.offer-banner h2{
+
+    font-size:26px;
+
+}
+
+
+
+.offer-banner p{
+
+    font-size:15px;
+
+}
+
+
+
+.offer-banner .btn{
+
+    width:80%;
+
+}
+
+
+
+.section-title h3{
+
+    font-size:22px;
+
+}
+
+
+
+.product-card{
+
+    padding:10px;
+
+}
+
+
+
+.product-img{
+
+    height:170px;
+
+}
+
+
+
+.product-info h5{
+
+    font-size:14px;
+
+}
+
+
+
+.price{
+
+    font-size:15px;
+
+}
+
+
+
+.old-price{
+
+    font-size:12px;
+
+}
+
+
+
+.favorite-icon{
+
+    font-size:18px;
+
+}
+
+
+
+.discount-badge{
+
+    font-size:10px;
+
+    padding:4px 8px;
+
+}
+
+
+}
+
+
+
+
+/* ==============================
+   SMALL PHONES
+============================== */
+
+
+@media(max-width:480px){
+
+
+.hero-img{
+
+    height:180px;
+
+}
+
+
+
+.category-card img{
+
+    width:60px;
+
+    height:60px;
+
+}
+
+
+
+.section-title h3{
+
+    font-size:20px;
+
+}
+
+
+
+.product-img{
+
+    height:150px;
+
+}
+
+
+
+.product-card{
+
+    border-radius:10px;
+
+}
+
+
+
 }

@@ -1,171 +1,297 @@
+
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
+
 <nav class="shop-navbar">
 
-    <div class="nav-container">
 
-        <!-- Logo -->
-        <a href="{% url 'home' %}" class="brand-logo">
-            Trendy<span>Shop</span>
-        </a>
+<div class="nav-container">
 
 
-        <!-- Mobile Toggle -->
-        <button class="mobile-toggle" id="mobileToggle">
-            <i class="fa-solid fa-bars"></i>
-        </button>
 
+<!-- LOGO -->
 
-        <!-- Search -->
-        <div class="search-wrapper">
+<a href="{% url 'home' %}" class="brand-logo">
 
-            <input 
-                type="search"
-                id="searchInput"
-                placeholder="Search products..."
-                autocomplete="off"
-            >
+Trendy<span>Shop</span>
 
-            <button class="search-btn">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
+</a>
 
 
-            <div id="suggestionsBox"
-                 class="suggestions-box">
-            </div>
 
-        </div>
 
+<!-- MOBILE MENU BUTTON -->
 
+<button class="mobile-toggle" id="mobileToggle">
 
-        <!-- Menu -->
-        <div class="nav-menu" id="navMenu">
+<i class="fa-solid fa-bars"></i>
 
+</button>
 
-            <!-- Mobile Close -->
-            <button class="mobile-close" id="mobileClose">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
 
 
 
-            <a href="{% url 'home' %}" class="nav-item">
-                <i class="fa-solid fa-house"></i>
-                Home
-            </a>
 
+<!-- SEARCH -->
 
-            <a href="{% url 'catagory' %}" class="nav-item">
-                <i class="fa-solid fa-layer-group"></i>
-                Categories
-            </a>
+<div class="search-wrapper">
 
 
-            {% if request.user.is_authenticated %}
+<input
 
+type="search"
 
-            <!-- Profile -->
-            <a href="{% url 'update' request.user.id %}"
-               class="profile-link">
+id="searchInput"
 
-                {% if request.user.profile_image %}
+placeholder="Search products..."
 
-                <img src="{{request.user.profile_image.url}}">
+autocomplete="off"
 
-                {% else %}
+/>
 
-                <img src="{% static 'images/default_profile.jpg' %}">
 
-                {% endif %}
 
-                <span>
-                    {{request.user.username}}
-                </span>
+<button class="search-btn">
 
-            </a>
+<i class="fa-solid fa-magnifying-glass"></i>
 
+</button>
 
 
-            <a href="{% url 'favorites' %}" 
-               class="nav-item">
 
-                <i class="fa-solid fa-heart"></i>
-                Wishlist
 
-            </a>
+<div id="suggestionsBox"
+class="suggestions-box">
 
+</div>
 
 
-            <a href="{% url 'cart' %}" 
-               class="nav-item cart-link">
 
-                <i class="fa-solid fa-cart-shopping"></i>
-                Cart
+</div>
 
-            </a>
 
 
 
-            <a href="{% url 'order_list' %}"
-               class="nav-item">
 
-                <i class="fa-solid fa-box"></i>
-                Orders
 
-            </a>
+<!-- NAVIGATION MENU -->
 
 
+<div class="nav-menu" id="navMenu">
 
-            <a href="{% url 'logout' %}"
-               class="login-btn">
 
-                Logout
 
-            </a>
+<button class="mobile-close" id="mobileClose">
 
+<i class="fa-solid fa-xmark"></i>
 
+</button>
 
-            {% else %}
 
 
 
-            <a href="{% url 'login' %}"
-               class="login-btn">
 
-                Login
+<a href="{% url 'home' %}" class="nav-item">
 
-            </a>
+<i class="fa-solid fa-house"></i>
 
+<span>Home</span>
 
+</a>
 
-            <a href="{% url 'register' %}"
-               class="nav-item">
 
-                Register
 
-            </a>
 
 
-            {% endif %}
+<a href="{% url 'catagory' %}" class="nav-item">
 
+<i class="fa-solid fa-layer-group"></i>
 
+<span>Categories</span>
 
-        </div>
+</a>
 
 
-    </div>
+
+
+
+{% if request.user.is_authenticated %}
+
+
+
+
+
+<!-- PROFILE ONLY FOR LOGGED USER -->
+
+<a href="{% url 'update' request.user.id %}"
+class="profile-link">
+
+
+
+{% if request.user.profile_image %}
+
+
+<img src="{{ request.user.profile_image.url }}">
+
+
+{% else %}
+
+
+<img src="{% static 'images/default_profile.jpg' %}">
+
+
+{% endif %}
+
+
+
+<span>
+{{ request.user.username }}
+</span>
+
+
+
+</a>
+
+
+
+
+
+
+<a href="{% url 'favorites' %}"
+class="nav-item">
+
+
+<i class="fa-solid fa-heart"></i>
+
+<span>
+Wishlist
+</span>
+
+
+</a>
+
+
+
+
+
+
+<a href="{% url 'cart' %}"
+class="nav-item">
+
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+<span>
+Cart
+</span>
+
+
+</a>
+
+
+
+
+
+
+
+<a href="{% url 'order_list' %}"
+class="nav-item">
+
+
+<i class="fa-solid fa-box"></i>
+
+<span>
+Orders
+</span>
+
+
+</a>
+
+
+
+
+
+
+<a href="{% url 'logout' %}"
+class="login-btn">
+
+
+Logout
+
+
+</a>
+
+
+
+
+
+
+
+{% else %}
+
+
+
+
+
+
+<a href="{% url 'login' %}"
+class="login-btn">
+
+
+Login
+
+
+</a>
+
+
+
+
+
+<a href="{% url 'register' %}"
+class="nav-item">
+
+
+Register
+
+
+</a>
+
+
+
+
+
+
+{% endif %}
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
 
 </nav>
 
 
 
+
+
+
 <script>
 
+
 const productDetailUrl =
+
 "{% url 'product_detail' 0 %}";
+
 
 </script>
 

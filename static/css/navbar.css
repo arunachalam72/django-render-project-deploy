@@ -1,10 +1,24 @@
+
 /* ================================
-   TRENDYSHOP MODERN NAVBAR
+   GLOBAL
 ================================ */
 
 *{
     box-sizing:border-box;
 }
+
+
+body{
+
+    padding-top:70px;
+
+}
+
+
+
+/* ================================
+   NAVBAR
+================================ */
 
 
 .shop-navbar{
@@ -28,7 +42,9 @@
 }
 
 
+
 .nav-container{
+
 
     max-width:1400px;
 
@@ -42,11 +58,12 @@
 
     align-items:center;
 
-    justify-content:space-between;
-
     gap:20px;
 
+
 }
+
+
 
 
 
@@ -57,6 +74,7 @@
 
 .brand-logo{
 
+
     font-size:28px;
 
     font-weight:800;
@@ -65,9 +83,8 @@
 
     text-decoration:none;
 
-    letter-spacing:.5px;
-
     white-space:nowrap;
+
 
 }
 
@@ -80,6 +97,8 @@
 
 
 
+
+
 /* ================================
    SEARCH
 ================================ */
@@ -87,21 +106,19 @@
 
 .search-wrapper{
 
-    position:relative;
 
     flex:1;
 
     max-width:600px;
 
-    display:flex;
-
-    align-items:center;
+    position:relative;
 
 }
 
 
 
 .search-wrapper input{
+
 
     width:100%;
 
@@ -111,15 +128,12 @@
 
     border:1px solid #ddd;
 
-    outline:none;
+    background:#f7f7f7;
 
     padding:0 55px 0 20px;
 
-    font-size:15px;
+    outline:none;
 
-    background:#f7f7f7;
-
-    transition:.3s;
 
 }
 
@@ -127,22 +141,26 @@
 
 .search-wrapper input:focus{
 
+
     background:white;
 
     border-color:#2874f0;
 
-    box-shadow:
-    0 0 0 4px rgba(40,116,240,.15);
 
 }
 
 
 
+
+
 .search-btn{
+
 
     position:absolute;
 
     right:5px;
+
+    top:3.5px;
 
     width:38px;
 
@@ -156,28 +174,20 @@
 
     color:white;
 
-    cursor:pointer;
-
-    transition:.3s;
 
 }
 
 
-
-.search-btn:hover{
-
-    transform:scale(1.08);
-
-}
 
 
 
 /* ================================
-   SEARCH SUGGESTIONS
+   SEARCH RESULT
 ================================ */
 
 
 .suggestions-box{
+
 
     position:absolute;
 
@@ -191,58 +201,37 @@
 
     border-radius:12px;
 
-    overflow:hidden;
-
     box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    overflow:hidden;
 
     max-height:350px;
 
     overflow-y:auto;
 
-    z-index:99999;
 
 }
 
 
 
-.suggestions-box a{
 
-    display:flex;
-
-    padding:10px;
-
-    text-decoration:none;
-
-    color:#333;
-
-    border-bottom:1px solid #eee;
-
-    transition:.2s;
-
-}
-
-
-
-.suggestions-box a:hover{
-
-    background:#f1f5ff;
-
-}
 
 
 
 /* ================================
-   NAV MENU
+   MENU
 ================================ */
 
 
 .nav-menu{
 
+
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    gap:10px;
+
 
 }
 
@@ -250,25 +239,25 @@
 
 .nav-item{
 
+
     display:flex;
 
     align-items:center;
 
     gap:6px;
 
-    text-decoration:none;
-
-    color:#333;
-
-    font-size:15px;
-
-    font-weight:600;
-
     padding:8px 12px;
 
     border-radius:8px;
 
-    transition:.3s;
+    color:#333;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    font-size:14px;
+
 
 }
 
@@ -284,9 +273,11 @@
 
 .nav-item:hover{
 
+
     background:#2874f0;
 
     color:white;
+
 
 }
 
@@ -300,41 +291,6 @@
 
 
 
-/* ================================
-   LOGIN BUTTON
-================================ */
-
-
-.login-btn{
-
-    text-decoration:none;
-
-    background:#2874f0;
-
-    color:white;
-
-    padding:10px 25px;
-
-    border-radius:25px;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-
-
-.login-btn:hover{
-
-    background:#125bd1;
-
-    color:white;
-
-    transform:translateY(-2px);
-
-}
-
 
 
 /* ================================
@@ -343,6 +299,7 @@
 
 
 .profile-link{
+
 
     display:flex;
 
@@ -362,6 +319,7 @@
 
 .profile-link img{
 
+
     width:38px;
 
     height:38px;
@@ -372,27 +330,61 @@
 
     border:2px solid #2874f0;
 
-    transition:.3s;
 
 }
 
 
 
-.profile-link img:hover{
-
-    transform:scale(1.1);
-
-}
 
 
 
 /* ================================
-   MOBILE BUTTONS
+   LOGIN
+================================ */
+
+
+.login-btn{
+
+
+    background:#2874f0;
+
+    color:white;
+
+    padding:10px 25px;
+
+    border-radius:25px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+
+}
+
+
+
+
+
+.login-btn:hover{
+
+    color:white;
+
+    background:#125bd1;
+
+}
+
+
+
+
+
+/* ================================
+   MOBILE BUTTON
 ================================ */
 
 
 .mobile-toggle,
 .mobile-close{
+
 
     display:none;
 
@@ -400,16 +392,21 @@
 
     background:none;
 
+    color:#2874f0;
+
     font-size:25px;
 
-    color:#2874f0;
 
 }
 
 
 
+
+
+
+
 /* ================================
-   MOBILE DESIGN
+   TABLET
 ================================ */
 
 
@@ -423,35 +420,35 @@
 }
 
 
+
 .brand-logo{
 
-    font-size:24px;
-
-}
-
-
-.nav-menu{
-
-    gap:5px;
+    font-size:23px;
 
 }
 
 
 
-.nav-item{
+.nav-item span{
 
-    padding:7px;
-
-    font-size:13px;
+    display:none;
 
 }
 
 
+
 }
 
+
+
+
+/* ================================
+   MOBILE MENU
+================================ */
 
 
 @media(max-width:991px){
+
 
 
 .shop-navbar{
@@ -464,7 +461,11 @@
 
 .nav-container{
 
+
     height:65px;
+
+    justify-content:space-between;
+
 
 }
 
@@ -472,17 +473,10 @@
 
 .mobile-toggle{
 
+
     display:block;
 
     order:3;
-
-}
-
-
-
-.search-wrapper{
-
-    order:2;
 
 }
 
@@ -496,21 +490,33 @@
 
 
 
+.search-wrapper{
+
+
+    order:2;
+
+    max-width:none;
+
+}
+
+
+
 .nav-menu{
+
 
     position:fixed;
 
     top:0;
 
-    right:-320px;
+    right:-100%;
 
-    width:300px;
+    width:85%;
+
+    max-width:320px;
 
     height:100vh;
 
     background:white;
-
-    display:flex;
 
     flex-direction:column;
 
@@ -520,9 +526,10 @@
 
     gap:15px;
 
-    box-shadow:-10px 0 30px rgba(0,0,0,.15);
+    transition:.35s;
 
-    transition:.4s;
+    box-shadow:-10px 0 30px rgba(0,0,0,.2);
+
 
 }
 
@@ -538,41 +545,47 @@
 
 .mobile-close{
 
+
     display:block;
 
     position:absolute;
 
-    top:20px;
-
     right:20px;
 
-}
+    top:20px;
 
-
-
-.nav-item{
-
-    width:100%;
-
-    font-size:16px;
 
 }
 
 
 
-.profile-link{
-
-    margin-bottom:15px;
-
-}
-
-
-
+.nav-item,
+.profile-link,
 .login-btn{
 
+
     width:100%;
 
-    text-align:center;
+
+}
+
+
+
+.profile-link img{
+
+
+    width:45px;
+
+    height:45px;
+
+
+}
+
+
+
+.nav-item span{
+
+    display:inline;
 
 }
 
@@ -580,30 +593,47 @@
 
 }
 
+
+
+
+
+
+/* ================================
+   SMALL MOBILE
+================================ */
 
 
 @media(max-width:600px){
 
 
-.search-wrapper{
 
-    position:absolute;
+body{
 
-    top:75px;
-
-    left:15px;
-
-    right:15px;
-
-    max-width:none;
+    padding-top:120px;
 
 }
 
 
 
+
 .shop-navbar{
 
-    margin-bottom:70px;
+    height:115px;
+
+}
+
+
+
+
+.nav-container{
+
+
+    height:115px;
+
+    flex-wrap:wrap;
+
+    padding:10px 15px;
+
 
 }
 
@@ -612,6 +642,64 @@
 .brand-logo{
 
     font-size:22px;
+
+}
+
+
+
+
+.mobile-toggle{
+
+    order:2;
+
+}
+
+
+
+.search-wrapper{
+
+
+    order:3;
+
+    flex-basis:100%;
+
+    width:100%;
+
+
+}
+
+
+
+.search-wrapper input{
+
+
+    height:42px;
+
+
+}
+
+
+
+}
+
+
+
+
+
+@media(max-width:380px){
+
+
+.brand-logo{
+
+    font-size:20px;
+
+}
+
+
+
+.nav-menu{
+
+    width:90%;
 
 }
 

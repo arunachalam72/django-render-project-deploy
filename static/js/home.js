@@ -1,268 +1,446 @@
+
 // ==============================
 // AOS Animation
 // ==============================
 
-AOS.init({
-    duration: 800,
-    easing: "ease-in-out",
-    once: true
-});
+if (typeof AOS !== "undefined") {
+
+    AOS.init({
+
+        duration:800,
+
+        easing:"ease-in-out",
+
+        once:true
+
+    });
+
+}
+
+
 
 
 // ==============================
 // Category Swiper
 // ==============================
 
+
+if (typeof Swiper !== "undefined") {
+
+
 const categorySwiper = new Swiper(".categorySwiper", {
 
-    slidesPerView: 6,
 
-    spaceBetween: 20,
+    slidesPerView:2,
 
-    loop: true,
+    spaceBetween:10,
 
-    autoplay: {
 
-        delay: 2500,
+    loop:true,
 
-        disableOnInteraction: false,
 
-    },
+    autoplay:{
 
-    pagination: {
 
-        el: ".swiper-pagination",
+        delay:2500,
 
-        clickable: true,
+        disableOnInteraction:false
+
 
     },
 
-    breakpoints: {
 
-        1200: {
-            slidesPerView: 6
+
+    breakpoints:{
+
+
+        1200:{
+
+            slidesPerView:6,
+
+            spaceBetween:20
+
         },
 
-        992: {
-            slidesPerView: 5
+
+
+        992:{
+
+            slidesPerView:5,
+
+            spaceBetween:15
+
         },
 
-        768: {
-            slidesPerView: 4
+
+
+        768:{
+
+            slidesPerView:4,
+
+            spaceBetween:15
+
         },
 
-        576: {
-            slidesPerView: 3
+
+
+        576:{
+
+            slidesPerView:3,
+
+            spaceBetween:10
+
         },
 
-        320: {
-            slidesPerView: 2
+
+
+        320:{
+
+            slidesPerView:2,
+
+            spaceBetween:10
+
         }
+
 
     }
 
+
 });
 
-
-// ==============================
-// Hero Carousel Auto
-// ==============================
-
-const heroCarousel = document.querySelector("#heroCarousel");
-
-if (heroCarousel) {
-
-    new bootstrap.Carousel(heroCarousel, {
-
-        interval: 3500,
-
-        ride: "carousel",
-
-        pause: false,
-
-        wrap: true
-
-    });
 
 }
 
 
+
+
+
+
 // ==============================
-// Product Hover Effect
+// Hero Carousel
 // ==============================
 
-document.querySelectorAll(".product-card").forEach(card => {
 
-    card.addEventListener("mouseenter", () => {
+const heroCarousel = document.querySelector("#heroCarousel");
 
-        card.style.transform = "translateY(-8px)";
 
-        card.style.transition = ".3s";
+if(heroCarousel && typeof bootstrap !== "undefined"){
 
-    });
 
-    card.addEventListener("mouseleave", () => {
+new bootstrap.Carousel(heroCarousel,{
 
-        card.style.transform = "translateY(0px)";
 
-    });
+    interval:3500,
+
+    ride:"carousel",
+
+    pause:false,
+
+    wrap:true
+
 
 });
+
+
+}
+
+
+
+
+
+
+// ==============================
+// Product Hover Animation
+// ==============================
+
+
+document.querySelectorAll(".product-card").forEach(card=>{
+
+
+card.addEventListener("mouseenter",()=>{
+
+
+    card.style.transform="translateY(-8px)";
+
+    card.style.transition=".3s";
+
+
+});
+
+
+
+
+card.addEventListener("mouseleave",()=>{
+
+
+    card.style.transform="translateY(0)";
+
+
+});
+
+
+
+});
+
+
+
+
 
 
 // ==============================
 // Wishlist Toggle
 // ==============================
 
-function toggleFavorite(element) {
 
-    const productId = element.dataset.productId;
+function toggleFavorite(element){
 
-    const url = `/toggle_favorite/${productId}/`;
 
-    fetch(url, {
+const productId = element.dataset.productId;
 
-        method: "GET",
 
-        headers: {
+const url = `/toggle_favorite/${productId}/`;
 
-            "X-Requested-With": "XMLHttpRequest"
 
-        }
 
-    })
+fetch(url,{
 
-    .then(response => response.json())
 
-    .then(data => {
+    method:"GET",
 
-        if (data.is_favorite) {
 
-            element.classList.add("active");
+    headers:{
 
-        } else {
 
-            element.classList.remove("active");
+        "X-Requested-With":"XMLHttpRequest"
 
-        }
 
-    })
+    }
 
-    .catch(error => {
 
-        console.error("Favorite Error:", error);
+})
 
-    });
+
+
+.then(response=>response.json())
+
+
+
+.then(data=>{
+
+
+    if(data.is_favorite){
+
+
+        element.classList.add("active");
+
+
+    }
+
+
+    else{
+
+
+        element.classList.remove("active");
+
+
+    }
+
+
+})
+
+
+
+.catch(error=>{
+
+
+    console.error(
+        "Favorite Error:",
+        error
+    );
+
+
+});
+
+
 
 }
 
 
-// Make available globally because onclick calls it
+
 window.toggleFavorite = toggleFavorite;
+
+
+
+
+
 
 
 // ==============================
 // Smooth Scroll
 // ==============================
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-    anchor.addEventListener("click", function(e) {
-
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute("href"));
-
-        if (target) {
-
-            target.scrollIntoView({
-
-                behavior: "smooth"
-
-            });
-
-        }
-
-    });
-
-});
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
 
 
-// ==============================
-// Back To Top Button
-// (Requires an element with id="backToTop")
-// ==============================
+anchor.addEventListener("click",function(e){
 
-const backToTop = document.getElementById("backToTop");
 
-window.addEventListener("scroll", () => {
+    e.preventDefault();
 
-    if (!backToTop) return;
 
-    if (window.scrollY > 300) {
+    const target=document.querySelector(
+        this.getAttribute("href")
+    );
 
-        backToTop.style.display = "flex";
 
-    } else {
 
-        backToTop.style.display = "none";
+    if(target){
 
-    }
 
-});
+        target.scrollIntoView({
 
-if (backToTop) {
-
-    backToTop.addEventListener("click", () => {
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
+            behavior:"smooth"
 
         });
 
-    });
+
+    }
+
+
+});
+
+
+});
+
+
+
+
+
+
+// ==============================
+// Back To Top
+// ==============================
+
+
+const backToTop=document.getElementById(
+    "backToTop"
+);
+
+
+
+if(backToTop){
+
+
+window.addEventListener("scroll",()=>{
+
+
+    if(window.scrollY>300){
+
+
+        backToTop.style.display="flex";
+
+
+    }
+
+
+    else{
+
+
+        backToTop.style.display="none";
+
+
+    }
+
+
+});
+
+
+
+backToTop.addEventListener("click",()=>{
+
+
+window.scrollTo({
+
+
+    top:0,
+
+    behavior:"smooth"
+
+
+});
+
+
+});
+
 
 }
 
 
+
+
+
+
+
 // ==============================
-// Fade-in Cards on Load
+// Fade Cards
 // ==============================
 
-window.addEventListener("load", () => {
 
-    document.querySelectorAll(".product-card").forEach((card, index) => {
+window.addEventListener("load",()=>{
 
-        setTimeout(() => {
 
-            card.classList.add("fade-up");
+document.querySelectorAll(".product-card")
+.forEach((card,index)=>{
 
-        }, index * 80);
 
-    });
+setTimeout(()=>{
+
+
+    card.classList.add("fade-up");
+
+
+},index*80);
+
+
 
 });
 
 
+});
+
+
+
+
+
+
+
 // ==============================
-// Optional Image Zoom
+// Image Zoom
 // ==============================
 
-document.querySelectorAll(".product-card img").forEach(img => {
 
-    img.addEventListener("mouseenter", () => {
+document.querySelectorAll(".product-img")
+.forEach(img=>{
 
-        img.style.transform = "scale(1.08)";
 
-    });
+img.addEventListener("mouseenter",()=>{
 
-    img.addEventListener("mouseleave", () => {
 
-        img.style.transform = "scale(1)";
+    img.style.transform="scale(1.08)";
 
-    });
+
+});
+
+
+
+img.addEventListener("mouseleave",()=>{
+
+
+    img.style.transform="scale(1)";
+
+
+});
+
 
 });
