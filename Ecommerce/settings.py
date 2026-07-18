@@ -182,8 +182,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #add your public and secret stripe key
 
 SECRET_KEY = os.getenv('SECRET_KEY')
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
-STRIPE_PUBLIC_KEY = os.getevnv('STRIPE_PUBLIC_KEY')
 
 
 #security settings
