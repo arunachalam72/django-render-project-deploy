@@ -1,360 +1,442 @@
 {% extends 'EcommerceApp/Base.html' %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    body {
-      margin-top: 40px;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
-      background-size: 400% 400%;
-      animation: gradientFlow 10s ease infinite;
-      min-height: 100vh;
-      padding: 50px 0;
-      overflow-x: hidden;
-    }
-
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* 🧭 Breadcrumb styling */
-    .breadcrumb-section {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      border-radius: 10px;
-      margin: 20px auto 40px;
-      padding: 15px 25px;
-      max-width: 1200px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .breadcrumb {
-      margin-bottom: 0;
-      background: transparent;
-    }
-
-    .breadcrumb-item a {
-      color: #fff;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .breadcrumb-item a:hover {
-      color: #2575fc;
-    }
-
-    .breadcrumb-item.active {
-      color: #ffeaa7;
-      font-weight: 600;
-    }
-
-    .breadcrumb-item + .breadcrumb-item::before {
-      color: #fff;
-    }
-
-    .page-title {
-      text-align: center;
-      color: white;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 40px;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    /* Sidebar Filter */
-    .filter-sidebar {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      height: fit-content;
-      animation: fadeInUp 1s ease;
-      position: sticky;
-      top: 100px;
-    }
-
-    .filter-sidebar h5 {
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .price-value {
-      font-weight: 600;
-      color: #2575fc;
-      margin-top: 10px;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      height: 8px;
-      border-radius: 5px;
-      background: linear-gradient(90deg, #6a11cb, #2575fc);
-      outline: none;
-      appearance: none;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #fff;
-      border: 3px solid #2575fc;
-      appearance: none;
-    }
-
-    .filter-btn {
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 10px 25px;
-      font-weight: 600;
-      transition: all 0.4s ease;
-      margin-top: 10px;
-      width: 100%;
-    }
-
-    .filter-btn:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #ff6a88, #ff99ac);
-    }
-
-    /* Product grid equal height */
-    .col-md-6.col-lg-4.col-sm-6 {
-      display: flex;
-    }
-
-    .product-card {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      overflow: hidden;
-      transition: all 0.6s ease;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .product-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    }
-
-    .product-img {
-      position: relative;
-      overflow: hidden;
-      flex: 0 0 250px;
-    }
-
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease, filter 0.4s ease;
-    }
-
-    .product-img:hover img {
-      transform: scale(1.2);
-      filter: brightness(1.1);
-    }
-
-    .product-info {
-      padding: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .product-info h5 {
-      min-height: 50px;
-      font-weight: 600;
-    }
-
-    .product-info p {
-      flex-grow: 1;
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    .price {
-      color: #2575fc;
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin: 10px 0;
-    }
-
-    .btn-cart {
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 10px 25px;
-      font-weight: 600;
-      margin-top: 10px;
-      align-self: center;
-    }
-
-    .btn-cart:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #ff6a88, #ff99ac);
-    }
-
-    @media (max-width: 768px) {
-      .filter-sidebar {
-        position: relative;
-        top: 0;
-        margin-bottom: 20px;
-      }
-    }
-    /* ❤️ Heart Icon Style */
-.favorite-icon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 22px;
-  color: lightslategray;
-  /* background: rgba(0, 0, 0, 0.4); */
-  /* border-radius: 50%; */
-  padding: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
+<style>
+body{
+    margin-top:40px;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#a1c4fd,#c2e9fb);
+    background-size:400% 400%;
+    animation:gradientFlow 10s ease infinite;
+    min-height:100vh;
+    padding:50px 0 100px;
+    overflow-x:hidden;
 }
-
-.favorite-icon:hover {
-  color: #ff4d4d;
-  /* background: rgba(255, 255, 255, 0.8); */
-  transform: scale(1.1);
+@keyframes gradientFlow{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
-
-.favorite-icon.active {
-  color: #ff4d4d;
-  /* background: rgba(255, 255, 255, 0.9); */
-  transform: scale(1.2);
-  animation: blink 1.5s infinite ease-in-out;
+.breadcrumb-section{
+    background:rgba(255,255,255,.2);
+    backdrop-filter:blur(10px);
+    border-radius:10px;
+    margin:20px auto 40px;
+    padding:15px 25px;
+    max-width:1200px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
-
-@keyframes blink {
-  0%, 100% {
-    transform: scale(1.1);
-    opacity: 1;
-    text-shadow: 0 0 10px rgba(255, 77, 77, 0.8);
-  }
-  50% {
-    transform: scale(1.3);
-    opacity: 0.6;
-    text-shadow: 0 0 20px rgba(255, 0, 0, 1);
-  }
+.breadcrumb{
+    margin-bottom:0;
+    background:transparent;
 }
-  </style>
-</head>
-<body>
-  <div class="container">
+.breadcrumb-item a{
+    color:white;
+    font-weight:600;
+    text-decoration:none;
+}
+.breadcrumb-item.active{
+    color:#ffeaa7;
+    font-weight:600;
+}
+.breadcrumb-item+.breadcrumb-item::before{
+    color:white;
+}
+.page-title{
+    text-align:center;
+    color:white;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:40px;
+    text-shadow:0 4px 15px rgba(0,0,0,.2);
+}
+.filter-sidebar{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+    position:sticky;
+    top:100px;
+}
+.filter-sidebar h5{
+    font-weight:600;
+    color:#333;
+}
+.price-value{
+    font-weight:600;
+    color:#2575fc;
+    margin-top:10px;
+}
+input[type="range"]{
+    width:100%;
+    height:8px;
+    border-radius:5px;
+    background:linear-gradient(90deg,#6a11cb,#2575fc);
+    appearance:none;
+    cursor:pointer;
+}
+input[type="range"]::-webkit-slider-thumb{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:white;
+    border:3px solid #2575fc;
+    appearance:none;
+}
+.filter-btn{
+    width:100%;
+    margin-top:15px;
+    padding:10px 25px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+    color:white;
+    font-weight:600;
+}
+.filter-btn:hover{
+    transform:scale(1.05);
+}
+.product-grid{
+    padding-bottom:60px;
+}
+.col-md-6.col-lg-4.col-sm-6{
+    display:flex;
+}
+.product-card{
+    width:100%;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    transition:.5s;
+    display:flex;
+    flex-direction:column;
+}
+.product-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+.product-img{
+    height:280px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:white;
+    padding:15px;
+    overflow:hidden;
+}
+.product-img img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    transition:.5s;
+}
+.product-img:hover img{
+    transform:scale(1.08);
+}
+.product-info{
+    padding:20px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+}
+.product-info h5{
+    font-weight:600;
+    min-height:45px;
+}
+.description{
+    color:#555;
+    font-size:.9rem;
+    line-height:1.5;
+}
+.description-text{
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+}
+.description-text.show{
+    display:block;
+}
+.read-more{
+    color:#2575fc;
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:.9rem;
+}
+.price{
+    color:#2575fc;
+    font-weight:700;
+    font-size:1.2rem;
+    margin:15px 0;
+}
+.btn-cart{
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+    color:white;
+    border-radius:50px;
+    padding:10px 25px;
+    font-weight:600;
+    text-decoration:none;
+    align-self:center;
+}
+.btn-cart:hover{
+    color:white;
+    transform:scale(1.05);
+}
+.favorite-icon{
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:22px;
+    color:lightslategray;
+    cursor:pointer;
+    z-index:5;
+}
+.favorite-icon:hover,
+.favorite-icon.active{
+    color:#ff4d4d;
+    transform:scale(1.2);
+}
+@media(max-width:768px){
+    .filter-sidebar{
+        position:relative;
+        top:0;
+        margin-bottom:25px;
+    }
+    .product-img{
+        height:220px;
+    }
+}
+</style>
+<div class="container">
 
-    <!-- 🧭 Breadcrumb Section -->
     <div class="breadcrumb-section">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fa fa-home me-1"></i> Home</a></li>
-          <li class="breadcrumb-item"><a href="{% url 'catagory' %}">Categories</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Products</li>
-        </ol>
-      </nav>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'home' %}">
+                        <i class="fa fa-home me-1"></i> Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'catagory' %}">
+                        Categories
+                    </a>
+                </li>
+                <li class="breadcrumb-item active">
+                    Products
+                </li>
+            </ol>
+        </nav>
     </div>
 
-    <h1 class="page-title">Explore Our Trendy Products</h1>
+    <h1 class="page-title">
+        Explore Our Trendy Products
+    </h1>
 
     <div class="row">
-      <!-- 🧭 Left Filter Sidebar -->
-      <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
-        <div class="filter-sidebar">
-          <form method="get">
-            <h5>Filter by Price</h5>
-            <input type="range" min="1000" max="200000" step="1000"
-                   name="max_price"
-                   id="priceRange"
-                   value="{{ selected_price|default:200000 }}"
-                   oninput="updatePriceValue(this.value)">
-            <div class="price-value" id="priceValue">Up to ₹{{ selected_price|default:200000 }}</div>
-            <button type="submit" class="filter-btn">Apply Filter</button>
-          </form>
-        </div>
-      </div>
 
-      <!-- 🛍️ Product Grid -->
-      <div class="col-lg-9 col-md-8 col-sm-12">
-        <div class="row g-4">
-          {% for prod in products %}
-          <div class="col-md-6 col-lg-4 col-sm-6 col-6">
-            <div class="product-card">
-              <div class="product-img">
-                <i class="fa-solid fa-heart favorite-icon {% if prod.id in favorite_ids %}active{% endif %}"
-                data-product-id="{{ prod.id }}"
-                onclick="toggleFavorite(this)"></i>
+        <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
 
-                <img src="{{ prod.product_image.url }}" alt="{{ prod.name }}">
-              </div>
-              <div class="product-info">
-                <h5>{{ prod.name }}</h5>
-                <p>{{ prod.description }}</p>
-                <div class="price">Rs. {{ prod.selling_price }}</div>
-                <a href="{% url 'product_detail' prod.id %}" class="btn-cart text-decoration-none">
-                    <i class="fas fa-bolt me-2"></i> More Details
-                </a>
-              </div>
+            <div class="filter-sidebar">
+
+                <form method="get">
+
+                    <h5>
+                        Filter by Price
+                    </h5>
+
+                    <input 
+                    type="range"
+                    min="1000"
+                    max="200000"
+                    step="1000"
+                    name="max_price"
+                    id="priceRange"
+                    value="{{ selected_price|default:200000 }}"
+                    oninput="updatePriceValue(this.value)">
+
+                    <div class="price-value" id="priceValue">
+                        Up to ₹{{ selected_price|default:200000 }}
+                    </div>
+
+                    <button type="submit" class="filter-btn">
+                        Apply Filter
+                    </button>
+
+                </form>
+
             </div>
-          </div>
-          {% empty %}
-          <p class="text-center text-white fs-5">No products found under this price.</p>
-          {% endfor %}
+
         </div>
-      </div>
+
+
+        <div class="col-lg-9 col-md-8 col-sm-12">
+
+            <div class="row g-4 product-grid">
+
+                {% for prod in products %}
+
+                <div class="col-md-6 col-lg-4 col-sm-6 col-6">
+
+                    <div class="product-card">
+
+                        <div class="product-img">
+
+                            <i class="fa-solid fa-heart favorite-icon {% if prod.id in favorite_ids %}active{% endif %}"
+                            data-product-id="{{ prod.id }}"
+                            onclick="toggleFavorite(this)">
+                            </i>
+
+
+                            {% if prod.product_image %}
+
+                            <img 
+                            src="{{ prod.product_image.url }}"
+                            alt="{{ prod.name }}"
+                            loading="lazy">
+
+                            {% else %}
+
+                            <img 
+                            src="/static/images/default.jpg"
+                            alt="{{ prod.name }}">
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="product-info">
+
+                            <h5>
+                                {{ prod.name }}
+                            </h5>
+
+
+                            <div class="description">
+
+                                <p class="description-text" id="desc{{ prod.id }}">
+                                    {{ prod.description }}
+                                </p>
+
+
+                                {% if prod.description|length > 120 %}
+
+                                <span 
+                                class="read-more"
+                                onclick="toggleDescription('{{ prod.id }}')">
+                                    Read More
+                                </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="price">
+                                Rs. {{ prod.selling_price }}
+                            </div>
+
+
+                            <a href="{% url 'product_detail' prod.id %}" class="btn-cart">
+                                <i class="fas fa-bolt me-2"></i>
+                                More Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% empty %}
+
+                <p class="text-center text-white fs-5">
+                    No products found under this price.
+                </p>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
 
-  <script>
-    function updatePriceValue(value) {
-      document.getElementById('priceValue').innerText = "Up to ₹" + value;
-    }
-    function toggleFavorite(element) {
-  const productId = element.getAttribute('data-product-id');
-  const url = `/toggle-favorite/${productId}/`;
+</div>
 
-  fetch(url, {
-    method: 'GET',
-    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.is_favorite) {
-      element.classList.add('active'); // Mark as favorite
-    } else {
-      element.classList.remove('active'); // Remove favorite
-    }
-  })
-  .catch(error => console.error('Error:', error));
+
+<script>
+
+function updatePriceValue(value){
+    document.getElementById('priceValue').innerText="Up to ₹"+value;
 }
 
-  </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+function toggleDescription(id){
+
+    let text=document.getElementById("desc"+id);
+    let button=text.nextElementSibling;
+
+
+    if(text.classList.contains("show")){
+
+        text.classList.remove("show");
+        button.innerText="Read More";
+
+    }
+    else{
+
+        text.classList.add("show");
+        button.innerText="Read Less";
+
+    }
+
+}
+
+
+function toggleFavorite(element){
+
+    const productId=element.getAttribute('data-product-id');
+
+    const url=`/toggle-favorite/${productId}/`;
+
+
+    fetch(url,{
+        method:'GET',
+        headers:{
+            'X-Requested-With':'XMLHttpRequest'
+        }
+    })
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        if(data.is_favorite){
+
+            element.classList.add('active');
+
+        }
+        else{
+
+            element.classList.remove('active');
+
+        }
+
+    })
+
+    .catch(error=>console.error('Error:',error));
+
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
