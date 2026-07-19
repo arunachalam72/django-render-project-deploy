@@ -35,11 +35,19 @@
         z-index:99999;
 
         transition:.35s;
+
+        opacity:0;
+        visibility:hidden;
     }
 
 
     .login-toast.show{
+
         transform:translateX(-50%) translateY(0);
+
+        opacity:1;
+        visibility:visible;
+
     }
 
 
@@ -57,7 +65,7 @@
 
         .login-toast{
             width:92%;
-            top:80px;   /* below navbar on mobile */
+            top:80px;
             justify-content:space-between;
         }
 
