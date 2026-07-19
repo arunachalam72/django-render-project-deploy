@@ -16,8 +16,9 @@
     .login-toast{
         position:fixed;
         left:50%;
-        bottom:20px;
-        transform:translateX(-50%) translateY(100px);
+        top:20px;
+
+        transform:translateX(-50%) translateY(-100px);
 
         background:#212529;
         color:#fff;
@@ -36,9 +37,11 @@
         transition:.35s;
     }
 
+
     .login-toast.show{
         transform:translateX(-50%) translateY(0);
     }
+
 
     .toast-login-btn{
         background:#ffc107;
@@ -49,11 +52,12 @@
         font-weight:600;
     }
 
+
     @media(max-width:768px){
 
         .login-toast{
             width:92%;
-            bottom:75px;   /* above mobile navbar */
+            top:80px;   /* below navbar on mobile */
             justify-content:space-between;
         }
 
