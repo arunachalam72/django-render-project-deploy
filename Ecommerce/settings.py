@@ -19,9 +19,7 @@ import cloudinary
 
 load_dotenv()
 
-print("CLOUD_NAME =", os.getenv("CLOUD_NAME"))
-print("API_KEY =", os.getenv("API_KEY"))
-print("API_SECRET =", os.getenv("API_SECRET"))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

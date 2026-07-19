@@ -224,34 +224,56 @@ def Contact_page(request):
 
 def Product_page(request, name):
 
-    # 🔐 JWT check (cookie-based)
     token = request.COOKIES.get("access_token")
-    print('token',token)
 
     if not token:
-        return redirect("login")   # or render login page
+        return redirect("login")
 
-    # Get all products for category
-    products = Product.objects.filter(category__name=name)
+    products = Product.objects.filter(
+        category__name=name,
+        status=False
+    )
 
-    # Price filter
-    max_price = request.GET.get('max_price')
-    if max_price and max_price.isdigit():
-        products = products.filter(selling_price__lte=int(max_price))
+    max_price = request.GET.get("max_price")
 
-    # Favorites
+    if max_price:
+        products = products.filter(
+            selling_price__lte=max_price
+        )
+
+    selected_brands = request.GET.getlist("brand")
+
+    if selected_brands:
+        products = products.filter(
+            brand__in=selected_brands
+        )
+
+    brands = Product.objects.filter(
+        category__name=name
+    ).values_list(
+        "brand",
+        flat=True
+    ).distinct()
+
     favorite_ids = []
+
     if request.user.is_authenticated:
         favorite_ids = Favorite.objects.filter(
             user=request.user
-        ).values_list('product_id', flat=True)
+        ).values_list(
+            "product_id",
+            flat=True
+        )
 
-    return render(request, 'EcommerceApp/Product.html', {
-        'products': products,
-        'selected_price': max_price or 200000,
-        'favorite_ids': list(favorite_ids),
-    })
-
+    return render(request,
+                  "EcommerceApp/Product.html",
+                  {
+                      "products": products,
+                      "brands": brands,
+                      "selected_brands": selected_brands,
+                      "selected_price": max_price or 200000,
+                      "favorite_ids": favorite_ids,
+                  })
 
 def product_detail(request, id):
     if request.user.is_authenticated:
@@ -338,6 +360,38 @@ def add_to_cart(request, product_id):
 
     return redirect('cart')
 
+
+@login_required
+def buy_now(request, product_id):
+
+    product = get_object_or_404(
+        Product,
+        id=product_id
+    )
+
+
+    quantity = int(
+        request.GET.get(
+            'quantity',
+            1
+        )
+    )
+
+
+    if product.quantity < quantity:
+
+        return redirect(
+            'product_detail',
+            id=product.id
+        )
+
+
+    # Send directly to checkout
+    return redirect(
+        'checkout',
+        product_id=product.id,
+        quantity=quantity
+    )
 
 @login_required
 def remove_from_cart(request, cart_item_id):
@@ -441,58 +495,89 @@ def remove_from_favorite(request, product_id):
     
     return redirect('favorites')
 
-# @login_required
-# def checkout(request):
-#     cart_items = CartItem.objects.filter(user=request.user)
-
-#     if not cart_items:
-#         return redirect('home')
-
-#     total = sum(item.total_price for item in cart_items)
-
-#     # Create order (Pending)
-#     order = Order.objects.create(
-#         user=request.user,
-#         total_amount=total
-#     )
-
-#     for item in cart_items:
-#         OrderItem.objects.create(
-#             order=order,
-#             product=item.product,
-#             quantity=item.quantity,
-#             price=item.product.selling_price
-#         )
-
-#     return render(request, 'EcommerceApp/Checkout.html', {
-#         'order': order,
-#         'stripe_public_key': settings.STRIPE_PUBLIC_KEY
-#     })
-
-from django.shortcuts import render, redirect
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from .models import CartItem, Order, OrderItem
-
 @login_required
 def checkout(request):
-    cart_items = CartItem.objects.filter(user=request.user)
 
-    # FIX: proper empty check
+    product_id = request.GET.get('product_id')
+    quantity = request.GET.get('quantity')
+
+
+    # ==========================
+    # BUY NOW FLOW
+    # ==========================
+
+    if product_id and quantity:
+
+        product = get_object_or_404(
+            Product,
+            id=product_id
+        )
+
+        quantity = int(quantity)
+
+
+        if product.quantity < quantity:
+            return redirect(
+                'product_detail',
+                id=product.id
+            )
+
+
+        total = product.selling_price * quantity
+
+
+        order = Order.objects.create(
+            user=request.user,
+            total_amount=total
+        )
+
+
+        OrderItem.objects.create(
+            order=order,
+            product=product,
+            quantity=quantity,
+            price=product.selling_price
+        )
+
+
+        return render(
+            request,
+            'EcommerceApp/Checkout.html',
+            {
+                'order': order,
+                'stripe_public_key': settings.STRIPE_PUBLIC_KEY
+            }
+        )
+
+
+
+    # ==========================
+    # CART CHECKOUT FLOW
+    # ==========================
+
+    cart_items = CartItem.objects.filter(
+        user=request.user
+    )
+
+
     if not cart_items.exists():
         return redirect('home')
 
-    # FIX: correct total calculation
-    total = sum(item.product.selling_price * item.quantity for item in cart_items)
 
-    # Create order
+    total = sum(
+        item.product.selling_price * item.quantity
+        for item in cart_items
+    )
+
+
     order = Order.objects.create(
         user=request.user,
         total_amount=total
     )
 
-    # Create order items
+
     for item in cart_items:
+
         OrderItem.objects.create(
             order=order,
             product=item.product,
@@ -500,10 +585,15 @@ def checkout(request):
             price=item.product.selling_price
         )
 
-    return render(request, 'EcommerceApp/Checkout.html', {
-        'order': order,
-        'stripe_public_key': settings.STRIPE_PUBLIC_KEY
-    })
+
+    return render(
+        request,
+        'EcommerceApp/Checkout.html',
+        {
+            'order': order,
+            'stripe_public_key': settings.STRIPE_PUBLIC_KEY
+        }
+    )
 
 # @require_POST
 def create_stripe_session(request, order_id):

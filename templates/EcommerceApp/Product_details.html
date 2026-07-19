@@ -793,46 +793,17 @@ alert(data.message);
 }
 
 
-
-
-
 function buyNow(event,id){
 
-event.preventDefault();
+    event.preventDefault();
 
-let quantity=document.getElementById("quantity").value;
+    let quantity=document.getElementById("quantity").value;
 
 
-fetch(`/add-to-cart/${id}/?quantity=${quantity}`,
-{
-method:"GET",
-headers:{
-"X-Requested-With":"XMLHttpRequest"
-}
-
-})
-
-.then(response=>response.json())
-
-.then(data=>{
-
-if(data.success){
-
-window.location.href="/checkout/";
+    window.location.href =
+    `/checkout/?product_id=${id}&quantity=${quantity}`;
 
 }
-
-else{
-
-alert(data.message);
-
-}
-
-});
-
-
-}
-
 
 
 window.onload=updateTotal;

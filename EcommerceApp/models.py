@@ -28,10 +28,11 @@ class Catagory(models.Model):
     def __str__(self):
         return self.name
 
+
 class Product(models.Model):
     category=models.ForeignKey(Catagory,on_delete=models.CASCADE)
+    brand = models.CharField(max_length=150,null=True,blank=True)
     name=models.CharField(max_length=150,null=False,blank=False,unique=True)
-    vendor=models.CharField(max_length=150,null=False,blank=False)
     product_image=models.ImageField(upload_to='images/products/',null=True,blank=True)
     image1 = models.ImageField(upload_to='images/products/', blank=True, null=True)
     image2 = models.ImageField(upload_to='images/products/', blank=True, null=True)

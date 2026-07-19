@@ -12,7 +12,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+<style>
+    .login-toast{
+        position:fixed;
+        left:50%;
+        bottom:20px;
+        transform:translateX(-50%) translateY(100px);
+
+        background:#212529;
+        color:#fff;
+
+        padding:14px 18px;
+        border-radius:12px;
+
+        display:flex;
+        align-items:center;
+        gap:12px;
+
+        box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+        z-index:99999;
+
+        transition:.35s;
+    }
+
+    .login-toast.show{
+        transform:translateX(-50%) translateY(0);
+    }
+
+    .toast-login-btn{
+        background:#ffc107;
+        color:#000;
+        padding:6px 12px;
+        border-radius:8px;
+        text-decoration:none;
+        font-weight:600;
+    }
+
+    @media(max-width:768px){
+
+        .login-toast{
+            width:92%;
+            bottom:75px;   /* above mobile navbar */
+            justify-content:space-between;
+        }
+
+    }
+</style>
 <body>
+    <body data-authenticated="{{ request.user.is_authenticated|yesno:'true,false' }}"></body>
     {% if request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'register' %}
         {% include 'EcommerceApp/Navbar.html' %}
     {% endif %}
@@ -22,7 +70,15 @@
     {% if request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'register' %}
         {% include 'EcommerceApp/Footer.html' %}
     {% endif %}
-    
+    <div id="loginToast" class="login-toast">
+        <i class="fa-solid fa-lock"></i>
+        <span>Please login to continue.</span>
+
+        <a href="{% url 'login' %}" class="toast-login-btn">
+            Login
+        </a>
+    </div>
+    <script src="{% static 'js/login-required.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

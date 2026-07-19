@@ -248,23 +248,51 @@ input[type="range"]::-webkit-slider-thumb{
 
                 <form method="get">
 
-                    <h5>
-                        Filter by Price
-                    </h5>
+                    <!-- Price Filter -->
+                    <h5>Filter by Price</h5>
 
-                    <input 
-                    type="range"
-                    min="1000"
-                    max="200000"
-                    step="1000"
-                    name="max_price"
-                    id="priceRange"
-                    value="{{ selected_price|default:200000 }}"
-                    oninput="updatePriceValue(this.value)">
+                    <input
+                        type="range"
+                        min="1000"
+                        max="200000"
+                        step="1000"
+                        name="max_price"
+                        id="priceRange"
+                        value="{{ selected_price|default:200000 }}"
+                        oninput="updatePriceValue(this.value)">
 
                     <div class="price-value" id="priceValue">
                         Up to ₹{{ selected_price|default:200000 }}
                     </div>
+
+                    <hr>
+
+                    <!-- Brand Filter -->
+                    <h5>Brand</h5>
+
+                    {% for brand in brands %}
+
+                    <div class="form-check mb-2">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="brand"
+                            value="{{ brand }}"
+                            id="brand{{ forloop.counter }}"
+                            {% if brand in selected_brands %}checked{% endif %}>
+
+                        <label
+                            class="form-check-label"
+                            for="brand{{ forloop.counter }}">
+
+                            {{ brand }}
+
+                        </label>
+
+                    </div>
+
+                    {% endfor %}
 
                     <button type="submit" class="filter-btn">
                         Apply Filter
