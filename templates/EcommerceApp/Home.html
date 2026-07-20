@@ -64,7 +64,7 @@ data-bs-slide="next">
 <div class="swiper-wrapper">
 {% for cat in categories %}
 <div class="swiper-slide">
-<a href="{% url 'product' cat.name %}">
+<a href="{% url 'product' cat.name %}" class="login-required">
 <div class="category-card">
 {% if cat.image %}
 <img src="{{ cat.image.url }}">
@@ -112,13 +112,13 @@ data-aos="zoom-in">
 <div class="discount-badge">
 SALE
 </div>
-<i class="fa-solid fa-heart favorite-icon 
+<i class="fa-solid fa-heart favorite-icon login-required 
 {% if prod.id in favorite_ids %}active{% endif %}"
 data-product-id="{{ prod.id }}"
 data-url="{% url 'toggle_favorite' prod.id %}"
 onclick="toggleFavorite(this)">
 </i>
-<a href="{% url 'product_detail' prod.id %}">
+<a href="{% url 'product_detail' prod.id %}" class="login-required">
 <div class="product-image-box">
     {% if prod.product_image %}
         <img src="{{ prod.product_image.url }}" class="product-img" alt="{{ prod.name }}">
@@ -140,7 +140,7 @@ onclick="toggleFavorite(this)">
 </span>
 </div>
 <a href="{% url 'product_detail' prod.id %}"
-class="btn btn-primary w-100 mt-3">
+class="btn btn-primary w-100 mt-3 login-required">
 View Product
 </a>
 </div>
@@ -160,7 +160,7 @@ View Product
 {% for prod in trending_products %}
 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
 <div class="product-card">
-<a href="{% url 'product_detail' prod.id %}">
+<a href="{% url 'product_detail' prod.id %}" class="login-required">
 <div class="product-image-box">
     {% if prod.product_image %}
         <img src="{{ prod.product_image.url }}" class="product-img" alt="{{ prod.name }}">
